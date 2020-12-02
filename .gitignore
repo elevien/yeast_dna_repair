@@ -4,5 +4,5 @@
 *.tif*
 **/sandbox*
 **/output*
-**/experimental_data*
+**/raw_data*
 *.csv
