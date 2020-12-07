@@ -7,6 +7,31 @@ import pandas as pd
 class bellman_harris_model_base:
     def __init__(self,f,f0,Q,type_names):
         '''
+        This is a base class for implementing multi-type population growth models.
+        can be sub-classes (see below) to implement specific models, such as
+        constant probability model and constant rate model, but also more complex
+        models with intermediate states and sub-populations with different
+        growth rates. Note that in order to make the code general purpose
+        and user friendly, I have sacraficed some computational efficiency.
+
+
+        Paramaters
+        -----------
+        f - f is the generation time distribution, which takes 3 arguments:
+                * the mother cell generation time
+                * the current time
+                * the population size
+                * the cell type
+        f0 - the lag time (i.e. the distribution of the first cell's
+            generation time). This takes no arguments
+
+        Q - a function which takes two arguments
+                * the mother cell generation time
+                * current time as arguments and
+            it returns a num_types dimensional square matrix
+            with rows that sum to 1
+
+
 
         '''
         self.f = f
@@ -18,22 +43,24 @@ class bellman_harris_model_base:
 
     def run_well(self,Nmax,*,dt_sample=0.01,tmax=100):
         '''
-        Simulate exponentially growing population
+        Simulate a single well
 
-        Input:
-            Nmax        - the maximum number of cells to generate
-            seed        - generation time of ancestral cell
-                            (relevant if there are correlations)
+        Paramaters
+        -----------
+            Nmax          - the maximum number of cells to generate
 
-        Optional Input:
+
+        Opational Paramaters
+        -----------
             tmax        - the maximum time to run
             dt_sample   - frequancy to save samples of the number of cells
 
 
-        Output:
-            N          - the number of cells at sample times
-            T          - sample times
-            L          - estimate of population growth rate from fitting
+        Output
+        -----------
+            output - a pandas dataframe containing the numbers of cells of each type
+                    in its columns
+
         '''
 
         gt0 = self.f0()
@@ -53,7 +80,7 @@ class bellman_harris_model_base:
         n = 1  # current number of cells
         m = np.zeros(self.num_types,dtype=int) # current number of each type
         m[0] = 1
-        t = 0.
+        t = 0. # the currect time (i.e. the time at which the last event occured)
 
 
         while n<Nmax-1 and t<tmax:
@@ -62,7 +89,7 @@ class bellman_harris_model_base:
             mother_dt = cells_dt[ind]       # time when this cell divides
             mother_gt = cells_gt[ind]       # generation time of cell
             mother_type =  cells_type[ind]  # type of cells
-            t = mother_dt              # this is the current time
+            t = mother_dt                   # update the currect time
 
 
             # update our saved arrays
@@ -76,26 +103,33 @@ class bellman_harris_model_base:
                    M[-1].append(m[k])
 
 
-            # decide the color of the daughter cells
+            # use the transition matrix Q to select the type of of the daughter cells
             daughter_type = np.random.choice(range(self.num_types),p=self.Q(mother_gt,t)[mother_type])
             cells_type[n] = daughter_type
             cells_type[ind] = daughter_type
             if daughter_type==mother_type:
+                # if daughter has the same type as the mother we gain 1 cell
+                # of that type
                 m[daughter_type] = m[daughter_type]+1
             else:
+                # other wise the number of cells of the mother type descreses
+                # by one and we gain 2 cells of the daughter type
                 m[daughter_type] = m[daughter_type]+2
                 m[mother_type] = m[mother_type]-1
+
             n = n + 1 # total number of cells always increases by one
 
-            # update compute the generation times of the daughter cells
+            # draw the generation times of the daughter cells
             gt1 = self.f(mother_gt,t,n,daughter_type)
             gt2 = self.f(mother_gt,t,n,daughter_type)
+
+            # and save their generation times and division times
             cells_gt[ind] = gt1
             cells_dt[ind] = t + gt1
             cells_gt[n] = gt2
             cells_dt[n] = t + gt2
 
-        # make data frame of output
+        # put the output in a dataframe
         output = pd.DataFrame({"time":T,"bf":N})
 
 
@@ -106,7 +140,28 @@ class bellman_harris_model_base:
         return output
 
     def run_ensemble(self,Nwells,Nmax,**kwargs):
+        '''
+        Simulate ensemble of wells
 
+        Paramaters
+        -----------
+            Nwells        - the number of wells to simulate
+            Nmax          - the maximum number of cells to generate in each well
+
+
+        Opational Paramaters
+        -----------
+            kwargs        - all the keyword arguments for run_well
+
+
+
+        Output
+        -----------
+            output - a pandas dataframe containing the numbers of cells of each type
+                    in its columns along with the number of the well associated with
+                    each sample
+
+        '''
         outputs = []
         for k in range(Nwells):
             output = self.run_well(Nmax,**kwargs)
