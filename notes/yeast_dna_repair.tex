@@ -1,0 +1,427 @@
+%\documentclass[reprint,aps,graphicx,pre,showpacs]{revtex4-1}
+\documentclass{article}
+\usepackage[margin=1.0in]{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\usepackage{geometry}
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{euscript,amsmath,amssymb,amsfonts,graphicx,bm}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=red}
+\usepackage{epstopdf}
+\usepackage{enumerate}
+\usepackage{csquotes}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{lineno}
+%\usepackage[nomarkers,figuresonly]{endfloat}
+%\linenumbers
+
+
+\newcommand{\bM}{{\bf M}}
+\newcommand{\by}{{\bf y}}
+\newcommand{\f}{{\bf f}}
+\newcommand{\bg}{{\bf g}}
+\newcommand{\bz}{{\bf z}}
+\newcommand{\bZ}{{\bf Z}}
+\newcommand{\bmu}{{\boldsymbol \mu}}
+\newcommand{\bnu}{{\boldsymbol \nu}}
+\newcommand{\bphi}{{\boldsymbol \phi}}
+
+
+\usepackage{mathtools} % for \vcentcolon
+%\usetikzlibrary{calc}
+%\linespread{2}
+\usepackage{amsthm}
+%\numberwithin{equation}{section}
+\usepackage{authblk}
+
+\makeatletter
+\renewcommand{\maketitle}{\bgroup\setlength{\parindent}{0pt}
+\begin{flushleft}
+  \textbf{\LARGE \@title}
+
+  \@author
+\end{flushleft}\egroup
+}
+\makeatother
+%
+\author[1]{Yeast team}
+%\author[2]{Jane Kondev}
+%\author[3]{Ariel Amir}
+\affil[1]{Harvard, Pasteur, Peking }
+%\affil[1,2]{Department of Physics, Brandeis University, Waltham, MA 02453 USA}
+%\affil[3]{School of Engineering and Applied Sciences, Harvard University, Cambridge, MA 02138, USA}
+
+\makeatletter
+\patchcmd{\@maketitle}{\LARGE \@title}{\fontsize{20}{19.2}\selectfont\@title}{}{}
+\makeatother
+
+\renewcommand\Authfont{\fontsize{10}{14.4}\selectfont}
+\renewcommand\Affilfont{\fontsize{9}{10.8}\itshape}
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{defn}{Definition}[section]
+\newtheorem{lem}{Lemma}[section]
+\newtheorem{cor}{Corollary}[section]
+\newtheorem{prop}{Proposition}[section]
+ \newtheorem{ass}{Assumption}
+
+
+
+%\newcommand[1]{\ensuremath{#1}}
+% \makeatletter
+%\renewcommand{\email}[2][]{%
+%  \ifx\emails\@empty\relax\else{\g@addto@macro\emails{,\space}}\fi%
+%  \@ifnotempty{#1}{\g@addto@macro\emails{\textrm{(#1)}\space}}%
+%  \g@addto@macro\emails{#2}%
+%}
+%\makeatother
+%
+% \usepackage{amsaddr}
+
+
+
+\title{Dynamics of double-strand break and repair in growing populations}
+\date{\today}
+\begin{document}
+
+
+\maketitle
+\tableofcontents
+
+\section{Introduction}
+
+\section{Analysis of pooled data reveals inconsistencies with simple model}
+We begin by ignoring the single-cell resolution afforded to us by the individual wells, and treat each condition as a bulk experiment by studying the number of bright field and GFP cells averaged over all the wells. The trajectories of the average number of bright field and GFP cells are shown in Figure \ref{fig:1} (A). We compare this data to a simple ODE mode in which an initial population of cells with modified DNA grows at a rate $\alpha$ and switches into a non-growing, broken state, at a rate $\rho$. The broken cells can then become repaired and once again begin to grow at a rate $\alpha$. Letting $m$, $b$ and $g$ be the number of modified, broken and repaired (or green) cells, we have
+\begin{align}\label{mbg_ode}
+\frac{d}{dt}m &= (\alpha - \beta) m\\
+\frac{d}{dt}b &= \beta m - \rho b\\
+\frac{d}{dt}g &= \alpha g + \rho b.
+\end{align}
+It is easy to see that the total population size $n = m+b+g$ will eventually grow exponentially at a rate $\alpha$. We can therefore obtain $\alpha$ by fitting the bright field data to an exponential. 
+A prediction of this model is that the fraction of  non-GFP cells, $\phi_{m+b} = (m+b)/(m+b+g)$  decays exponentially at a rate that is independent of $\rho$: 
+\begin{equation}
+\phi_{m+b}= 1- e^{\beta}. 
+\end{equation}
+This exponentially decay is seen in some, but no all experiments; see Figure \ref{fig:1} (B)
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.6]{fig1.pdf}
+\caption{{\bf Analysis of pooled data} (A) The average number of bright field and GFP cells as a function of time in each condition.  (B) The fraction of non-GFP cells as function of time for each condition.  (C) The rate to turn obtained from Equation \ref{rt_approx} compared to simulations with the values of inferred from the trajectories in (B). }\label{fig:1}
+\end{figure}
+
+
+
+
+An alternative way to determine the rate of DNA breaking, we can obtain a formula for $\beta$ directly by solving for $\beta$ in Equation \ref{mbg_ode}. 
+\begin{equation}\label{betat}
+\beta  = \frac{1}{m}\left[ \alpha m - \frac{d}{dt}m \right] \approx \frac{1}{n-g}\left[  \frac{n-g}{n} \frac{d}{dt}n  - \frac{d}{dt}(n-g) \right]
+\end{equation}
+
+
+The trajectories of $r(t)$ shown in Figure \ref{fig:1} (C) appear inconsistent with our assumptions thus far. Therefore, we consider 
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.8]{fig2.pdf}
+\caption{(A) The average number of bright field and GFP cells as a function of time in each condition.  (B) The fraction of non-GFP cells as function of time for each condition.  (C) The rate to turn obtained from Equation \ref{rt_approx} compared to simulations with the values of inferred from the trajectories in (B). }\label{fig:1}
+\end{figure}
+
+
+\section{Fluctuation analysis}
+We now consider the variability between wells within a condition. In order to remove the effects of lag time and asynchronous  growth, we consider the variance  of $G$ conditioned on the total number of cells, ${\rm var}(G|N)$. In a simple model where we neglect the broken, non-green state, ${\rm var}(G|N)$ undergoes phase transition at $p_c = 1/2$ (see Section \ref{app:sync} for derivation). When $p<1/2$, ${\rm var}(G|N)$ grows exponentially, while for $p<1/2$ it decays. In all the experiments, we find that ${\rm var}(G|N)$ grows exponentially. 
+
+\newpage
+
+\appendix
+
+\section{Analysis of ODE model}\label{app:ode}
+
+
+\section{Analysis of asynchronous model}\label{app:async}
+
+Here consider a stochastic model where divisions are asynchronous; that is, cells have different generation times. For simplicity, we will consider the case where generation times are independent and exponentially distributed. Although not biologically realistic, at captures the essential qualitative features of the dynamics, namely the growth of variance with time. We consider the probability $P(n,g,t)$ of observing $n$ cells, $g$ of which are green at time $t$ and suppose that cells divide at a constant rate $\alpha$, while non-green cells turn green at a rate $\beta$. Under these assumptions $P(n,g,t)$ obeys the master equation 
+\begin{align}
+\begin{split}
+\frac{d}{dt}P(n,g,t) &= \alpha(n-g-1)P(n-1,g,t) + \alpha (m-1)P(n-1,g-1,t) \\
+&+ \beta (n-g+1)p(n,g-1,t)- \left[\alpha n + \beta (n-g)  \right]P(n,g,t)
+\end{split}
+\end{align}
+For the averages, we have
+\begin{align}
+\frac{d}{dt}\langle N  \rangle &= \alpha\langle N  \rangle \\
+\frac{d}{dt}\langle G  \rangle &= \alpha\langle G  \rangle + \beta(\langle N\rangle - \langle  G\rangle)  
+\end{align}
+which implies $\langle N  \rangle  \sim e^{\alpha t}$ and 
+\begin{equation}
+\langle G \rangle = e^{(\alpha-\beta)t} \left[e^{\beta t} - 1\right].
+\end{equation}
+We now consider the second moment:
+\begin{align}
+\frac{d}{dt}\langle  G^2\rangle  &= \sum_{g,n} g^2 \frac{d}{dt}P(n,g,t)\\
+&= \sum_n \sum_g \alpha (n-g) g^2 P(n,g,t) + \sum_n \sum_g \alpha g (g+1)^2 P(n,g,t)\\
+&+ \sum_g \sum_g \beta (n-g)(g+1)^2 P(n,g,t) - \sum_n\sum_g \left[\alpha n + \beta(n-g) \right] g^2 P(n,g,t)\\
+&= \alpha \langle  N G^2\rangle - \alpha \langle G^3 \rangle  + \alpha \langle  G^3\rangle 
+  + 2 \alpha \langle  G^2\rangle  + \alpha \langle G \rangle  + \beta \langle N G^2 \rangle  - \beta \langle G^3 \rangle \\
+&+ 2\beta \langle N G \rangle  - 2 \beta \langle G^2 \rangle  + \beta \langle  N\rangle  - \beta \langle  G\rangle 
+ - \langle N G^2 \rangle - \beta \langle  N G^2\rangle  + \beta \langle G^3\rangle 
+\end{align}
+After cancelling terms, we find
+\begin{align}
+\frac{d}{dt}\langle  G^2\rangle  &= 2 \alpha \langle G^2 \rangle  + \alpha \langle G \rangle + 2 \beta \langle N G \rangle \\
+&- 2 \beta \langle G^2 \rangle  + \beta \langle N \rangle  - \beta \langle G\rangle. 
+\end{align}
+For the variance 
+\begin{align}
+\frac{d}{dt}{\rm var}(G) &= \frac{d}{dt} \left[\langle G^2 \rangle - \langle G \rangle^2 \right]\\
+&= \frac{d}{dt} \langle G^2 \rangle  - 2\langle G \rangle \frac{d}{dt} \langle G \rangle\\
+&= 2 (\alpha - \beta){\rm var}(G) + 2 \beta {\rm cov}(G,N) + (\alpha-\beta)\langle G \rangle  - \langle  N\rangle. 
+\end{align} 
+We need to calculate the dynamics of the covariance to obtain a closed set of equations. Proceed in a similar manner as we did for the variance, we start with the product:
+\begin{equation}
+\frac{d}{dt}\langle G N \rangle  = \alpha \langle  G\rangle  + 2\alpha \langle G N \rangle  - \beta \langle G N \rangle  + \beta \langle N^2 \rangle. 
+\end{equation}
+Subtracting the equations for the means gives 
+\begin{align}
+\frac{d}{dt} {\rm cov}(G,N) &= \frac{d}{dt}\langle G N\rangle  - \langle G  \rangle \frac{d}{dt}\langle  N\rangle  -  \langle N  \rangle \frac{d}{dt}\langle  G\rangle\\
+&= \beta {\rm var}(N) + (2\alpha - \beta){\rm cov}(G,N) + \alpha \langle G \rangle. 
+\end{align}
+Since ${\rm var}(N) \sim e^{2 \alpha t}$, we conclude that ${\rm cov}(N,G) \sim e^{2\alpha t}$ and therefore,  
+\begin{equation}
+{\rm var}(G) \sim e^{2\alpha t}
+\end{equation}
+for any value of $\beta$. 
+
+\section{Analysis of synchronous model}\label{app:sync}
+Here we consider a class of synchronous model in which all growing cells have a fixed generation time.  
+
+\subsection{Two state model}
+We start by ignoring any intermediate state the breaking of DNA and the appearance of growing GFP cells. In this case, the total number of cells at the $t$th generation is simply $2^t$. Letting $G_t$ be the number of green cells at time $t$, we have
+\begin{equation}\label{Gt}
+G_t = 2G_t +2 \sum_{j=1}^{2^{t-1} - G_{t-1}}\xi_{t,j}
+\end{equation}
+where $\xi_{t,j}$ are independent Bernoulli  random variables with probability of success $p$ (the probability to turn green in a given generation).  The first term represents the division of existing green cells, while the second represents the fact that each of the $2^{t-1}-G_{t-1}$ non-green cells in the previous generation has a probability $p$ to turn green before dividing. The second term has a binomial distribution with mean $p(2^{t} - 2G_{t-1})$ and variance $p(1-p)(2^{t} - 2G_{t-1})$ and can therefore be approximated by a normal distribution, allowing us to rewrite Equation \ref{Gt} as
+\begin{equation}
+G_t \approx 2(1-p)G_{t-1} + p2^{t} + \sqrt{p(1-p)(2^{t} - 2G_{t-1})}\eta_t
+\end{equation}
+where $\eta_t$ are independent standard normal random variates. For the mean (this actually be obtained directly from Equation \ref{Gt} and is exact), we have
+\begin{align}
+\langle G_t \rangle &=  2(1-p)\langle G_{t-1} \rangle  + p2^{t}  = 2^t\sum_{j\le} (1-p)^{t-j}p\\
+&= 2^t \left[1-(1-p)^t\right]
+\end{align}
+From this equation, we can deduce that the fraction of green cells approaches one for all values of $p$. 
+For the variance, we make the approximation that $G_{t-1}$ appearing in the square root an be replaced by $\langle G_{t-1} \rangle$ mean, which gives
+\begin{equation}
+G_t \approx 2(1-p)G_{t-1} + p2^{t} + \sqrt{2^tp(1-p)^t}\eta_t.
+\end{equation}
+Taking the variance of both sides, we have 
+\begin{align}
+{\rm var}(G_t) &\approx 4(1-p)^2{\rm var}(G_{t-1}) + 2^tp(1-p)^t  = \sum_{j\le 2} 2^{2t-j} (1-p)^{2(t-j)} p(1-p)^j\\
+&= \frac{p \left((2-2 p)^t-1\right) (2-2 p)^t}{1-2 p} = \frac{p}{1-2p} \left[\left(2^t (1-p)\right)^2 - 2^t (1-p)^t \right].
+\end{align}
+Considering the cases $p<1/2$ and $p>1/2$ separately, we obtain the simple expressions:  
+\begin{equation}
+{\rm var}(G_t) = \left\{\begin{array}{cc} 
+\frac{p}{1-2p} \left[2(1-p)\right]^{2t}& \text{ if } p<1/2\\
+\frac{p}{2p-1} \left[2(1-p)\right]^{t}& \text{ if } p>1/2
+\end{array}\right.
+\end{equation}
+Rewriting this expression in terms of the total number of cells $N = 2^t$, we have
+\begin{equation}
+{\rm var}(G_t|N) = \left\{\begin{array}{cc} 
+\frac{p}{1-2p} N^{2 + 2 \ln(1-p)/\ln(2)}& \text{ if } p<1/2\\
+\frac{p}{2p-1} N^{1+ 1 \ln(1-p)/\ln(2)}& \text{ if } p>1/2
+\end{array}\right.
+\end{equation}
+
+
+\subsection{Broken state model}
+
+Let the probability for a modified cell to break be $p$ and the probability for a broken cell to repair in a given generation be $q$. Letting $B_t$ and $G_t$ be the number of broken and green cells, we have
+\begin{align}
+M_t &= 2M_{t-1} -  \sum_{i}^{2M_{t-1}}\xi_{t,{\rm break},i}\\
+B_t &= \sum_{i=1}^{B_{t-1}}(1-\xi_{t,{\rm repair},i}) + \sum_{i}^{2M_{t-1}}\xi_{t,{\rm break},i}\\
+G_t &=2G_{t-1} + \sum_{i=1}^{B_{t-1}}\xi_{t,{\rm repair},i} 
+\end{align}
+where $\xi_{{\rm repair},i}$ and $\xi_{{\rm break},i}$ are $1$ if the $i$th cells in the sums are broken or repaired respectively, and zero otherwise. Making a Gaussian approximation, we have 
+\begin{align}
+\begin{split}\label{MBGt}
+M_t &= 2M_{t-1}(1 - p)+ \sqrt{2p(1-p)M_{t-1}} \eta_{2,t}\\
+B_t &= (1-q)B_{t-1} +2pM_{t-1} - \sqrt{q(1-q)B_{t-1}}\eta_{1,t} - \sqrt{2p(1-p)M_{t-1}} \eta_{2,t}\\
+G_t &=2G_{t-1} + qB_{t-1}+\sqrt{q(1-q)B_{t-1}}\eta_{1,t}.
+\end{split}
+\end{align}
+Here, $\eta_{i,t}$ are independent standard normal random variates, but note that we have been careful to flip the signs in-front of the noise terms above to that, e.g., a positive value of $\eta_{2,t}$ in the first equation corresponds to a negative value in the second. Since we ultimately interested in the distribution of $G_t$ conditioned on the total number of cells, $N_t = G_t + B_t + M_t$, we consider the equation of $N_t$: 
+\begin{equation}
+N_t = 2(N_t - B_t).
+\end{equation}
+
+
+Conditioned on the previous generation ${\bf z}_t = (M_t,B_t,G_t)^T$ has a multivariate normal distribution: 
+\begin{align}
+f_t(\bz|\bz') = \frac{1}{\sqrt{2\pi } {\rm det}\Sigma_{t}(\bz')^{1/2}} e^{-\frac{1}{2}(\bz-\bmu_{t}(\bz'))^T\Sigma_{t}(\bz')^{-1}(\bz-\bmu_{t}(\bz'))}
+\end{align}
+The mean and covariance matrix can be determined from Equation \eqref{MBGt}. For the mean, we have
+\begin{align}
+\bmu_{t} &= \left[\begin{array}{c}
+ \langle  M_t |\bz_{t-1}\rangle \\
+ \langle  B_t |\bz_{t-1}\rangle \\
+ \langle  G_t |\bz_{t-1}\rangle 
+ \end{array}
+\right]
+%= \left[\begin{array}{c}
+%2M_{t-1} -pM_{t-1}\\
+%(1-q)B_{t-1} +pM_{t-1}\\
+%2G_{t-1} + qB_{t-1}
+%\end{array}
+%\right]\\
+%&
+= A \bz_{t-1} 
+\end{align}
+where
+\begin{equation}
+A=\
+\left[ \begin{array}{ccc}
+2 -2p & 0 &0 \\
+2p & 1-q & 0 \\
+0 & q & 2
+\end{array}\right].
+\end{equation}
+Writing the initial $\bz_0 = (1,0,0)$, we find 
+\begin{equation}
+\langle \bz_t \rangle  = \left[
+\begin{array}{c}
+ (2-2 p)^t \\
+ \frac{2 p \left((1-q)^t-(2-2 p)^t\right)}{2 p-q-1} \\
+ -\frac{q \left(2 p \left(2^t-(1-q)^t\right)+(q+1) 2^t \left((1-p)^t-1\right)\right)}{(q+1) (-2 p+q+1)} \\
+\end{array}
+\right].
+\end{equation}
+We find (as we could have deduced without this calculation) that the fraction of green cells approaches one as $t \to \infty$. 
+
+
+Now we turn to the covariance matrix. The elements of $\Sigma_t$, are determined by variance and covariance of $b_t$ and $g_t$: 
+\begin{align}
+\Sigma_{t,1,1} &= {\rm var}(M_t|\bz_{t-1}) =p(1-p)2M_{t-1}\\
+\Sigma_{t,2,2} &= {\rm var}(B_t|\bz_{t-1}) = q(1-q)B_{t-1}+p(1-p)2M_{t-1}\\
+\Sigma_{t,3,3} &= {\rm var}(G_t|\bz_{t-1}) = q(1-q)B_{t-1}
+\end{align}
+and 
+\begin{align}
+\Sigma_{t,1,2} &={\rm cov}(M_t,B_t|\bz_{t-1}) = 2p(1-p)M_{t-1}\\
+\Sigma_{t,2,3} &={\rm cov}(B_t,G_t|\bz_{t-1}) = q(1-q)B_{t-1}\\
+\Sigma_{t,3,1} &={\rm cov}(M_t,G_t|\bz_{t-1}) = 0
+\end{align}
+The covariance matrix is therefore, 
+\begin{equation}
+\Sigma_{t} =\left[ \begin{array}{ccc}
+2p(1-p)M_{t-1}  & 2p(1-p)M_{t-1}  & 0\\
+2p(1-p)M_{t-1}  & q(1-q)B_{t-1} + 2p(1-p)M_{t-1}  & q(1-q)B_{t-1} \\
+0 &q(1-q)B_{t-1} & q(1-q)B_{t-1}
+\end{array}\right].
+\end{equation}
+
+We are interested in the unconditional distribution $P_t(\bz)$, so we write the recursive equation
+\begin{equation}
+P_t(\bz) = \int f_t(\bz|\bz')P_{t-1}(\bz') d\bz'.
+\end{equation}
+We make ansatz that $P_t(\bz)$ is a Gaussian 
+\begin{equation}
+P_t(\bz) = \frac{1}{\sqrt{2\pi }\, \left[{\rm det}\Omega_{t}\right]^{1/2}} e^{-\frac{1}{2}(\bz-\bnu_{t})^T\Omega_{t}^{-1}(\bz-\bnu_{t})}.
+\end{equation}
+This is equivalent to assuming that $B_{t-1}$ and $G_{t-1}$ appearing in the elements of the covariance matrix can be replaced by their averages, thus making the joint distribution of $\bz$ and $\bz'$ also a multivariate Guassian:
+\begin{align}
+P_t(\bz,\bz') &= f_t(\bz|\bz')P_{t-1}(\bz') \propto e^{-\frac{1}{2}(\bz-\bmu_{t}(\bz'))^T\Sigma_{t}^{-1}(\bz-\bmu_{t}(\bz'))-\frac{1}{2}(\bz'-\bnu_{t-1})^T\Omega_{t-1}^{-1}(\bz'-\bnu_{t-1})}\\
+&\propto e^{-\frac{1}{2}(\bz-\hat{\bmu}_t)^T\hat{\Sigma}_{t}^{-1}(\bz-\hat{\bmu}_{t})}
+\end{align} 
+where $\hat{\bmu}_t$ and $\hat{\Sigma}_{t}$ are the mean and covariance matrices of the joint distribution of the current and previous generations. 
+%We match the matrix equations 
+%\begin{equation}
+%((\bz,\bz')-\hat{\bmu}_t)^T\hat{\Sigma}_{t}^{-1}((\bz,\bz')-\hat{\bmu}_{t}) = (\bz-\bmu_{t}(\bz'))^T\Sigma_{t}^{-1}(\bz-\bmu_{t}(\bz'))+(\bz'-\bnu_t)^T\Omega_t^{-1}(\bz'-\bnu_t) 
+%\end{equation}
+Since $\bz$ and $\bz'$ have marginal distributions given by  $P_{t}(\bz)$ and $P_{t-1}(\bz)$ respectively, $\hat{\Sigma}_{t}$ has the block form:
+\begin{equation}
+\hat{\Sigma}_{t} = \left[ \begin{array}{cc}
+\Omega_t  &\hat{\Sigma}_{1,2}\\
+\hat{\Sigma}_{1,2}^T  &\Omega_{t-1} 
+\end{array}\right].
+\end{equation}
+where 
+\begin{equation}
+\hat{\Sigma}_{1,2} =\left[ \begin{array}{ccc}
+{\rm cov}(M_t,M_{t-1})  &{\rm cov}(M_t,B_{t-1})  &{\rm cov}(M_t,G_{t-1}) \\
+{\rm cov}(B_t,M_{t-1})  &{\rm cov}(B_t,B_{t-1})  &{\rm cov}(B_t,G_{t-1}) \\
+{\rm cov}(G_t,M_{t-1})  &{\rm cov}(G_t,B_{t-1})  &{\rm cov}(G_t,G_{t-1}) 
+\end{array}\right].
+\end{equation}
+%Let's work out the elements of this covariance matrix. Starting with the diagonal entries:
+%\begin{align}
+%\begin{split}
+%{\rm cov}(M_t,M_{t-1})  &= 2 {\rm var}(M_{t-1})\\
+%{\rm cov}(B_t,B_{t-1}) &= (1-q){\rm var}(B_{t-1}) + 2p {\rm cov}(B_{t-1},M_{t-1})\\
+%{\rm cov}(G_t,G_{t-1}) &=  2{\rm var}(G_{t-1}) + q {\rm cov}(G_{t-1},B_{t-1})\\
+%{\rm cov}(M_t,B_{t-1}) &= 2 {\rm cov}(M_{t-1},B_{t-1})\\
+%{\rm cov}(M_t,G_{t-1}) &= 2 {\rm cov}(M_{t-1},G_{t-1})\\
+%{\rm cov}(B_t,G_{t-1}) &=(1-q){\rm cov}(B_{t-1},G_{t-1}) + 2p {\rm cov}(M_{t-1},G_{t-1})\\
+%{\rm cov}(B_t,M_{t-1}) &= 2(1-q){\rm cov}(B_{t-1},M_{t-1}) + 2 p {\rm var}(M_{t-1})\\
+%{\rm cov}(G_t,M_{t-1}) &= 2 {\rm cov}(G_{t-1},M_{t-1}) + q {\rm cov}(B_{t-1},M_{t-1})\\
+%{\rm cov}(G_t,B_{t-1}) &= 2 {\rm cov}(G_{t-1},B_{t-1}) + q{\rm var}(B_{t-1})
+%\end{split}
+%\end{align}
+After some algebra, we can now write $\hat{\Sigma}_{1,2}$ in terms of the entries of $\Omega_{t-1}$ (dropping the time subscript for clarity): 
+\begin{align}
+\hat{\Sigma}_{t,1,2} &=\left[ \begin{array}{ccc}
+2(1-p)\Omega_{1,1}  & 2(1-p) \Omega_{1,2}  & 2(1-p) \Omega_{t-1,1,3} \\
+(1-q) \Omega_{2,1} + 2 p \Omega_{1,1}&(1-q)\Omega_{2,2} + 2p \Omega_{1,2}  &(1-q) \Omega_{2,3} + 2p \Omega_{1,3}\\
+2\Omega_{3,1} + q \Omega_{2,1} &2 \Omega_{3,2} + q \Omega_{2,2}  &2\Omega_{3,3} + q \Omega_{3,2}
+\end{array}\right]\\
+&= D\Omega_{t-1}
+\end{align}
+where
+\begin{equation}
+D = \left[ \begin{array}{ccc}
+2(1-p)  &0  &0 \\
+2p  & (1-q)  & 0 \\
+0 & q  &2
+\end{array}\right].
+\end{equation}
+In order to derive an equation for $\Omega_t$, we notice that $\Sigma_t$ (which is known) can be expressed as the shur complement 
+ \begin{equation}
+ \Sigma_t = \Omega_{t} - \hat{\Sigma}_{t,1,2} \Omega_{t-1}^{-1}\hat{\Sigma}_{t,1,2}^T\
+ \end{equation}
+ which gives us a recursive relation for $\Omega_t$: 
+ \begin{equation}
+ \Omega_{t} =  \Sigma_t + D(D\Omega_{t-1})^T =  \Sigma_t + D\Omega_{t-1}D^T
+ \end{equation}
+ Taking $\Omega_{0} = 0$, 
+ \begin{equation}
+  \Omega_{t} = \sum_{j\le t}D^{t-j}\Sigma_j \left(D^T\right)^{t-j}
+ \end{equation}
+ We are actually interested in the variation in green cells conditioned on the total number of cells, thus, we introduce the transformation 
+ \begin{equation}
+ L = \left[ \begin{array}{ccc}
+1  & 1 &1 \\
+0  & 0& 1 \\
+\end{array}\right].
+ \end{equation} 
+ This gives us the covariance matrix for $(N_t,G_t)$:
+ \begin{equation}
+  \bar{\Omega}_{t} =L\Omega_t L^T =  \sum_{j\le t}LD^{t-j}\Sigma_j \left(D^T\right)^{t-j}L^T
+ \end{equation}
+ In terms of the entries of $ \tilde{\Omega}_{t}$, 
+ \begin{equation}
+ {\rm var}(G_t|N_t) = \bar{\Omega}_{t,2,2} - \frac{\bar{\Omega}_{t,1,2}^2}{ \bar{\Omega}_{t,1,1} }
+ \end{equation}
+
+
+
+
+
+\bibliographystyle{plain}
+\bibliography{/Users/E/Dropbox/bib/main.bib}
+
+
+\end{document}  

@@ -112,8 +112,8 @@ class bellman_harris_model_base:
                 # of that type
                 m[daughter_type] = m[daughter_type]+1
             else:
-                # other wise the number of cells of the mother type descreses
-                # by one and we gain 2 cells of the daughter type
+                # otherwise the number of cells of the mother type decreases
+                # by 1 and we gain 2 cells of the daughter type
                 m[daughter_type] = m[daughter_type]+2
                 m[mother_type] = m[mother_type]-1
 

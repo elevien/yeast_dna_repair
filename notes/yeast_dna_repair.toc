@@ -1,0 +1,8 @@
+\contentsline {section}{\numberline {1}Introduction}{1}{section.1}
+\contentsline {section}{\numberline {2}Analysis of pooled data reveals inconsistencies with simple model}{1}{section.2}
+\contentsline {section}{\numberline {3}Fluctuation analysis}{2}{section.3}
+\contentsline {section}{\numberline {A}Analysis of ODE model}{3}{appendix.A}
+\contentsline {section}{\numberline {B}Analysis of asynchronous model}{3}{appendix.B}
+\contentsline {section}{\numberline {C}Analysis of synchronous model}{4}{appendix.C}
+\contentsline {subsection}{\numberline {C.1}Two state model}{4}{subsection.C.1}
+\contentsline {subsection}{\numberline {C.2}Broken state model}{5}{subsection.C.2}
