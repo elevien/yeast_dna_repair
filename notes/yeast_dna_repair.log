@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  9 DEC 2020 18:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  9 DEC 2020 20:19
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -578,7 +578,7 @@ LaTeX Warning: Reference `rt_approx' on page 1 undefined on input line 113.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<fig2.pdf, id=49, 421.575pt x 351.64111pt>
+<fig2.pdf, id=48, 421.575pt x 351.64111pt>
 File: fig2.pdf Graphic file (type pdf)
  <use fig2.pdf>
 Package pdftex.def Info: fig2.pdf used on input line 129.
@@ -616,8 +616,8 @@ LaTeX Warning: There were multiply-defined labels.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 427.
  ) 
 Here is how much of TeX's memory you used:
- 9895 strings out of 493014
- 146686 string characters out of 6133351
+ 9894 strings out of 493014
+ 146673 string characters out of 6133351
  267627 words of memory out of 5000000
  13206 multiletter control sequences out of 15000+600000
  16079 words of font info for 61 fonts, out of 8000000 for 9000
@@ -640,10 +640,10 @@ live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texl
 ive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texliv
 e/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/
 2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb>
-Output written on yeast_dna_repair.pdf (7 pages, 584454 bytes).
+Output written on yeast_dna_repair.pdf (7 pages, 583912 bytes).
 PDF statistics:
- 269 PDF objects out of 1000 (max. 8388607)
- 233 compressed objects within 3 object streams
- 82 named destinations out of 1000 (max. 500000)
+ 267 PDF objects out of 1000 (max. 8388607)
+ 231 compressed objects within 3 object streams
+ 81 named destinations out of 1000 (max. 500000)
  75 words of extra memory for PDF output out of 10000 (max. 10000000)
 
