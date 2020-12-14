@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  9 DEC 2020 20:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  13 DEC 2020 16:04
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -563,49 +563,46 @@ Overfull \hbox (5.11618pt too wide) in paragraph at lines 96--96
 sim-ple model 
  []
 
-<fig1.pdf, id=46, 711.48138pt x 577.2011pt>
+<fig1.pdf, id=46, 710.655pt x 723.08014pt>
 File: fig1.pdf Graphic file (type pdf)
  <use fig1.pdf>
-Package pdftex.def Info: fig1.pdf used on input line 112.
-(pdftex.def)             Requested size: 426.89212pt x 346.32332pt.
+Package pdftex.def Info: fig1.pdf used on input line 114.
+(pdftex.def)             Requested size: 426.39629pt x 433.85143pt.
+ [1
+
+{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2 <./f
+ig1.pdf>]
+
+LaTeX Warning: Reference `fig:2' on page 3 undefined on input line 145.
 
 
-LaTeX Warning: Reference `rt_approx' on page 1 undefined on input line 113.
+LaTeX Warning: Reference `fig:2' on page 3 undefined on input line 145.
 
-
-LaTeX Warning: Reference `rt_approx' on page 1 undefined on input line 113.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<fig2.pdf, id=48, 421.575pt x 351.64111pt>
+<fig2.pdf, id=104, 702.29466pt x 623.32875pt>
 File: fig2.pdf Graphic file (type pdf)
  <use fig2.pdf>
-Package pdftex.def Info: fig2.pdf used on input line 129.
-(pdftex.def)             Requested size: 337.26045pt x 281.31326pt.
+Package pdftex.def Info: fig2.pdf used on input line 156.
+(pdftex.def)             Requested size: 421.38004pt x 374.00014pt.
 
 
-LaTeX Warning: Reference `rt_approx' on page 1 undefined on input line 130.
+LaTeX Warning: Reference `rt_approx' on page 3 undefined on input line 157.
 
 
-LaTeX Warning: Reference `rt_approx' on page 1 undefined on input line 130.
+LaTeX Warning: Reference `rt_approx' on page 3 undefined on input line 157.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[1
-
-{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-[2 <./fig1.pdf>] [3 <./fig2.pdf>] [4] [5] [6]
+[3] [4 <./fig2.pdf>] [5] [6] [7]
 No file yeast_dna_repair.bbl.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 427.
-[7]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 427.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 455.
+[8] [9]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 455.
  (./yeast_dna_repair.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 427.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 427.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 455.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 455.
 Package rerunfilecheck Info: File `yeast_dna_repair.out' has not changed.
-(rerunfilecheck)             Checksum: 299A54CE63D67326693E2CF3F62EB63C;523.
+(rerunfilecheck)             Checksum: 4D0794E89CD8A2304DF638BCB08806CF;524.
 
 
 LaTeX Warning: There were undefined references.
@@ -613,16 +610,16 @@ LaTeX Warning: There were undefined references.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 427.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 455.
  ) 
 Here is how much of TeX's memory you used:
- 9894 strings out of 493014
- 146673 string characters out of 6133351
+ 9902 strings out of 493014
+ 146754 string characters out of 6133351
  267627 words of memory out of 5000000
- 13206 multiletter control sequences out of 15000+600000
+ 13207 multiletter control sequences out of 15000+600000
  16079 words of font info for 61 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 36i,15n,39p,941b,391s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 36i,15n,39p,1036b,402s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></
@@ -640,10 +637,10 @@ live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texl
 ive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texliv
 e/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/
 2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb>
-Output written on yeast_dna_repair.pdf (7 pages, 583912 bytes).
+Output written on yeast_dna_repair.pdf (9 pages, 651114 bytes).
 PDF statistics:
- 267 PDF objects out of 1000 (max. 8388607)
- 231 compressed objects within 3 object streams
- 81 named destinations out of 1000 (max. 500000)
+ 299 PDF objects out of 1000 (max. 8388607)
+ 257 compressed objects within 3 object streams
+ 88 named destinations out of 1000 (max. 500000)
  75 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -100,19 +100,49 @@ We begin by ignoring the single-cell resolution afforded to us by the individual
 \frac{d}{dt}b &= \beta m - \rho b\\
 \frac{d}{dt}g &= \alpha g + \rho b.
 \end{align}
-It is easy to see that the total population size $n = m+b+g$ will eventually grow exponentially at a rate $\alpha$. We can therefore obtain $\alpha$ by fitting the bright field data to an exponential. 
-A prediction of this model is that the fraction of  non-GFP cells, $\phi_{m+b} = (m+b)/(m+b+g)$  decays exponentially at a rate that is independent of $\rho$: 
+It is easy to see that the total population size $n = m+b+g$ will eventually grow exponentially at a rate $\alpha$. We can therefore obtain $\alpha$ by fitting the bright field data to an exponential. We can also see from these equation that $m$ and $b$ will eventually grow (assuming $\alpha> \beta$) exponentially at a rate $\alpha-\beta$, while $g$ will eventually grows at a rate $\alpha$. 
+In particular, a prediction of this model is that the fraction of  non-GFP cells, $\phi_{m+b} = (b+m)/(m+b+g)$  decays exponentially at a rate $\beta$:
 \begin{equation}
-\phi_{m+b}= 1- e^{\beta}. 
+\phi_{m+b} \sim 1- e^{-\beta t}. 
 \end{equation}
-This exponentially decay is seen in some, but no all experiments; see Figure \ref{fig:1} (B)
+Note that this result is independent of whether we impose a carrying capacity on the population, the ratios will remain unchanged even if the population is not growing exponentially. 
+Fitting $\ln \phi_{m+b}$ to a line thus gives us a way to infer the break rate which (at least in the long-term) is independent of $\rho$. 
+This exponentially decay is seen in some, but no all experiments; see Figure \ref{fig:1} (B). In CTG-Cpf1 and CGG-Cpf1 the green cells appear very slowly, making is difficult to separate the long term decay from the the transient dynamics. In GAA-SpCas9 and CTG-SpCas9 we don't see the number of GFP cells converge to the number of bright field cells, resulting an a biphasic trajectory of $\phi_{m+b}$. 
 
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=0.6]{fig1.pdf}
-\caption{{\bf Analysis of pooled data} (A) The average number of bright field and GFP cells as a function of time in each condition.  (B) The fraction of non-GFP cells as function of time for each condition.  (C) The rate to turn obtained from Equation \ref{rt_approx} compared to simulations with the values of inferred from the trajectories in (B). }\label{fig:1}
+\caption{{\bf Analysis of pooled data} (A) The average number of bright field and GFP cells as a function of time in each condition.  (B) The fraction of non-GFP cells as function of time for each condition.  (C) The rate to turn obtained from Equation \ref{rt} compared to simulations with the values of inferred from the trajectories in (B). Classification of experiments in terms of comparison between predictions from (B) and (C). }\label{fig:1}
 \end{figure}
 
+
+An alternative approach to inferring $\beta$ is to look at the instantaneous  production of green cells. Solving for $\beta$ in Equation \ref{mbg_ode}, we get 
+\begin{align}
+\begin{split}
+\beta %&= \frac{1}{m}\left[\frac{d}{dt}b +\rho b\right] =  \frac{1}{m}\left[\frac{d}{dt}b +\frac{d}{dt}g - \alpha g\right] \\
+&= \frac{1}{n-g-b}\left[\frac{d}{dt}b +\frac{d}{dt}g -\frac{g}{n-b} \frac{d}{dt}(n-b)\right]
+\end{split}
+\end{align}
+Since we don't know the number of broken and not yet repaired cells, we can't compute all the terms in this equation directly. However, if $\rho \gg \beta$, we can make the approximation that the number of broken cells is small to obtain 
+\begin{equation}\label{rt}
+\beta \approx r(t) \equiv \frac{1}{n-g}\left[\frac{d}{dt}g -\frac{g}{n} \frac{d}{dt}n\right]
+\end{equation}
+In Figure \ref{fig:1} (C) we compare $r(t)$ compute for the data and simulations of the model with $\rho \to \infty$ so that there are no broken cells. We first focus on the experiments for which $\phi_{m+b}$ exhibits clear exponential decay, as in the simulations and data appear to converge (even if the transient dynamics differ). However, notice that even in these experiments $r(t)$ appears to be larger in the simulations. 
+This makes sense, since $r(t)$ is an approximation to $\beta$. Plugging the solution of the ODEs into Equation \ref{rt} we find
+\begin{equation}
+r(t) =\frac{\beta  \rho  \left(e^{t (\alpha -\beta +\rho )}-1\right)}{(\alpha +\rho ) e^{t (\alpha -\beta +\rho )}-\beta } 
+\end{equation}
+and therefore $r(t)$ converges to 
+\begin{equation}
+r_{\infty} = \frac{\beta \rho}{\alpha+\rho}
+\end{equation}
+ as $t \to \infty$, which, as expected, converges to $\beta$ when $\rho \to \infty$ (the repairing of broken cells as fast). Note that $\beta \rho/(\alpha+\rho) < \beta$, therefore it makes sense that computation of $r(t)$ seems to produce an underestimate of $\beta$ in the long-time limit.
+ 
+We can estimate $\rho$ from the formula 
+\begin{equation}
+\rho = \frac{\alpha r_{\infty}}{r_{\infty} - \beta}.
+\end{equation}
+Using these estimates of $\rho$ along with estimates of $\beta$ obtained previously from fitting $\phi_{m+g}$, we simulate the full model with the broken state and see if any of the discrepancies in the transient dynamics are explained by a slow repair rate. The results are shown in Figure \ref{fig:2} (A). Including a finite time between break and repair seems to explain the transient dynamics in $r(t)$ for the experiments where $\phi_{m+b}$ decays exponentially (highlighted in purple) but no the experiments where few green cells appear (yellow) or the ones with biphasic decay (red). In order to explain the ``bump" in the CAA-SpCas9 and CTG-SpCas9, we assume that some fraction of the repaired cells fail to turn green, but still growth. Some simulations for carrying parameters of this model are shown in Figure \ref{fig:2} (B), where we can see that this will indeed produce the behavior observed in some experiments \textcolor{red}{[can we estimate the probability not to turn green?]}. 
 
 
 
@@ -121,12 +151,9 @@ This exponentially decay is seen in some, but no all experiments; see Figure \re
 %\beta  = \frac{1}{m}\left[ \alpha m - \frac{d}{dt}m \right] \approx \frac{1}{n-g}\left[  \frac{n-g}{n} \frac{d}{dt}n  - \frac{d}{dt}(n-g) \right]
 %\end{equation}
 
-
-The trajectories of $r(t)$ shown in Figure \ref{fig:1} (C) appear inconsistent with our assumptions thus far. Therefore, we consider 
-
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.8]{fig2.pdf}
+\includegraphics[scale=0.6]{fig2.pdf}
 \caption{(A) The average number of bright field and GFP cells as a function of time in each condition.  (B) The fraction of non-GFP cells as function of time for each condition.  (C) The rate to turn obtained from Equation \ref{rt_approx} compared to simulations with the values of inferred from the trajectories in (B). }\label{fig:1}
 \end{figure}
 
@@ -138,8 +165,8 @@ We now consider the variability between wells within a condition. In order to re
 
 \appendix
 
-\section{Analysis of ODE model}\label{app:ode}
-
+\section{Analysis of ODE model }\label{app:ode}
+\textcolor{red}{[UNFINISHED]}
 
 \section{Analysis of asynchronous model}\label{app:async}
 
@@ -413,8 +440,9 @@ In order to derive an equation for $\Omega_t$, we notice that $\Sigma_t$ (which 
  \end{equation}
  In terms of the entries of $ \tilde{\Omega}_{t}$, 
  \begin{equation}
- {\rm var}(G_t|N_t) = \bar{\Omega}_{t,2,2} - \frac{\bar{\Omega}_{t,1,2}^2}{ \bar{\Omega}_{t,1,1} }
+ {\rm var}(G_t|N_t) = \bar{\Omega}_{t,2,2} - \frac{\bar{\Omega}_{t,1,2}^2}{ \bar{\Omega}_{t,1,1} }. 
  \end{equation}
+ 
 
 
 
