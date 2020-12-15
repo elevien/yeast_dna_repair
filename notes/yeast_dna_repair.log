@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  15 DEC 2020 17:29
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  15 DEC 2020 17:36
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -617,6 +617,9 @@ Package rerunfilecheck Info: File `yeast_dna_repair.out' has not changed.
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 511.
  ) 
 Here is how much of TeX's memory you used:
@@ -642,7 +645,7 @@ al/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/
 texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/t
 exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/tex
 live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on yeast_dna_repair.pdf (10 pages, 832322 bytes).
+Output written on yeast_dna_repair.pdf (10 pages, 832332 bytes).
 PDF statistics:
  344 PDF objects out of 1000 (max. 8388607)
  289 compressed objects within 3 object streams
