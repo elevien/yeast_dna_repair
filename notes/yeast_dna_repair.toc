@@ -1,8 +1,7 @@
 \contentsline {section}{\numberline {1}Introduction}{1}{section.1}
-\contentsline {section}{\numberline {2}Analysis of pooled data reveals inconsistencies with simple model}{1}{section.2}
-\contentsline {section}{\numberline {3}Fluctuation analysis}{3}{section.3}
-\contentsline {section}{\numberline {A}Analysis of ODE model }{4}{appendix.A}
-\contentsline {section}{\numberline {B}Analysis of asynchronous model}{4}{appendix.B}
-\contentsline {section}{\numberline {C}Analysis of synchronous model}{5}{appendix.C}
-\contentsline {subsection}{\numberline {C.1}Two state model}{6}{subsection.C.1}
-\contentsline {subsection}{\numberline {C.2}Broken state model}{6}{subsection.C.2}
+\contentsline {section}{\numberline {2}Analysis of pooled data reveals time-scales of break and repair}{1}{section.2}
+\contentsline {section}{\numberline {3}Fluctuation analysis is inconsistent with simple model}{3}{section.3}
+\contentsline {section}{\numberline {A}Analysis of asynchronous model}{5}{appendix.A}
+\contentsline {section}{\numberline {B}Analysis of synchronous model}{6}{appendix.B}
+\contentsline {subsection}{\numberline {B.1}Two state model}{6}{subsection.B.1}
+\contentsline {subsection}{\numberline {B.2}Broken state model}{7}{subsection.B.2}

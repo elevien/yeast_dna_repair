@@ -47,10 +47,10 @@
 }
 \makeatother
 %
-\author[1]{Yeast team}
+\author[1]{Yeast DNA repair group}
 %\author[2]{Jane Kondev}
 %\author[3]{Ariel Amir}
-\affil[1]{Harvard, Pasteur, Peking }
+%\affil[1]{Harvard, Pasteur, Peking }
 %\affil[1,2]{Department of Physics, Brandeis University, Waltham, MA 02453 USA}
 %\affil[3]{School of Engineering and Applied Sciences, Harvard University, Cambridge, MA 02138, USA}
 
@@ -93,56 +93,75 @@
 
 \section{Introduction}
 
-\section{Analysis of pooled data reveals inconsistencies with simple model}
+\section{Analysis of pooled data reveals time-scales of break and repair}
 We begin by ignoring the single-cell resolution afforded to us by the individual wells, and treat each condition as a bulk experiment by studying the number of bright field and GFP cells averaged over all the wells. The trajectories of the average number of bright field and GFP cells are shown in Figure \ref{fig:1} (A). We compare this data to a simple ODE mode in which an initial population of cells with modified DNA grows at a rate $\alpha$ and switches into a non-growing, broken state, at a rate $\rho$. The broken cells can then become repaired and once again begin to grow at a rate $\alpha$. Letting $m$, $b$ and $g$ be the number of modified, broken and repaired (or green) cells, we have
 \begin{align}\label{mbg_ode}
 \frac{d}{dt}m &= (\alpha - \beta) m\\
 \frac{d}{dt}b &= \beta m - \rho b\\
 \frac{d}{dt}g &= \alpha g + \rho b.
 \end{align}
-It is easy to see that the total population size $n = m+b+g$ will eventually grow exponentially at a rate $\alpha$. We can therefore obtain $\alpha$ by fitting the bright field data to an exponential. We can also see from these equation that $m$ and $b$ will eventually grow (assuming $\alpha> \beta$) exponentially at a rate $\alpha-\beta$, while $g$ will eventually grows at a rate $\alpha$. 
+It is easy to see that the total population size $n = m+b+g$ will eventually grow exponentially at a rate $\alpha$. We can therefore obtain $\alpha$ by fitting the bright field data to an exponential. We can also see from these equations that $m$ and $b$ will eventually grow (assuming $\alpha> \beta$) exponentially at a rate $\alpha-\beta$, while $g$ will eventually grows at a rate $\alpha$. 
 In particular, a prediction of this model is that the fraction of  non-GFP cells, $\phi_{m+b} = (b+m)/(m+b+g)$  decays exponentially at a rate $\beta$:
 \begin{equation}
 \phi_{m+b} \sim 1- e^{-\beta t}. 
 \end{equation}
 Note that this result is independent of whether we impose a carrying capacity on the population, the ratios will remain unchanged even if the population is not growing exponentially. 
-Fitting $\ln \phi_{m+b}$ to a line thus gives us a way to infer the break rate which (at least in the long-term) is independent of $\rho$. 
-This exponentially decay is seen in some, but no all experiments; see Figure \ref{fig:1} (B). In CTG-Cpf1 and CGG-Cpf1 the green cells appear very slowly, making is difficult to separate the long term decay from the the transient dynamics. In GAA-SpCas9 and CTG-SpCas9 we don't see the number of GFP cells converge to the number of bright field cells, resulting an a biphasic trajectory of $\phi_{m+b}$. 
+Fitting $\ln (1-\phi_{m+b})$ to a line thus gives us a way to infer the break rate which (at least in the long-term) is independent of $\rho$. 
+This exponential decay is seen in some, but not all experiments; see Figure \ref{fig:1} (B). In CTG-Cpf1 and CGG-Cpf1 the green cells appear very slowly, making is difficult to separate the long term decay from the the transient dynamics. In GAA-SpCas9 and CTG-SpCas9 we don't see the number of GFP cells converge to the number of bright field cells, resulting an a biphasic trajectory of $\phi_{m+b}$. 
 
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=0.6]{fig1.pdf}
-\caption{{\bf Analysis of pooled data} (A) The average number of bright field and GFP cells as a function of time in each condition.  (B) The fraction of non-GFP cells as function of time for each condition.  (C) The rate to turn obtained from Equation \ref{rt} compared to simulations with the values of inferred from the trajectories in (B). Classification of experiments in terms of comparison between predictions from (B) and (C). }\label{fig:1}
+\caption{(A) The average number of bright field and GFP cells as a function of time in each condition.  (B) The fraction of non-GFP cells as function of time for each condition.  (C) The rate to turn green obtained from Equation \ref{rt} compared to simulations with the values of inferred from the trajectories in (B). Classification of experiments in terms of comparison between predictions from (B) and (C). }\label{fig:1}
 \end{figure}
 
 
 An alternative approach to inferring $\beta$ is to look at the instantaneous  production of green cells. Solving for $\beta$ in Equation \ref{mbg_ode}, we get 
 \begin{align}
 \begin{split}
-\beta %&= \frac{1}{m}\left[\frac{d}{dt}b +\rho b\right] =  \frac{1}{m}\left[\frac{d}{dt}b +\frac{d}{dt}g - \alpha g\right] \\
+\beta &= \frac{1}{m}\left[\frac{d}{dt}b +\rho b\right] =  \frac{1}{m}\left[\frac{d}{dt}b +\frac{d}{dt}g - \alpha g\right] \\
 &= \frac{1}{n-g-b}\left[\frac{d}{dt}b +\frac{d}{dt}g -\frac{g}{n-b} \frac{d}{dt}(n-b)\right]
 \end{split}
 \end{align}
-Since we don't know the number of broken and not yet repaired cells, we can't compute all the terms in this equation directly. However, if $\rho \gg \beta$, we can make the approximation that the number of broken cells is small to obtain 
+Since we don't know the number of broken and not yet repaired cells, we can't compute all the terms in this equation directly. However, if $\rho \gg \beta$, we can neglect the broken cells, leading to the approximation
 \begin{equation}\label{rt}
-\beta \approx r(t) \equiv \frac{1}{n-g}\left[\frac{d}{dt}g -\frac{g}{n} \frac{d}{dt}n\right]
+\beta \approx r(t) \equiv \frac{1}{n-g}\left[\frac{d}{dt}g -\frac{g}{n} \frac{d}{dt}n\right]. 
 \end{equation}
 In Figure \ref{fig:1} (C) we compare $r(t)$ compute for the data and simulations of the model with $\rho \to \infty$ so that there are no broken cells. We first focus on the experiments for which $\phi_{m+b}$ exhibits clear exponential decay, as in the simulations and data appear to converge (even if the transient dynamics differ). However, notice that even in these experiments $r(t)$ appears to be larger in the simulations. 
-This makes sense, since $r(t)$ is an approximation to $\beta$. Plugging the solution of the ODEs into Equation \ref{rt} we find
+This is not surprising, since $r(t)$ is an approximation to $\beta$. 
+
+
+Within the model, we can actually obtain a formula for $r(t)$ for finite $\rho$ by plugging the solution of the ODEs into Equation \ref{rt}. We find
 \begin{equation}
 r(t) =\frac{\beta  \rho  \left(e^{t (\alpha -\beta +\rho )}-1\right)}{(\alpha +\rho ) e^{t (\alpha -\beta +\rho )}-\beta } 
 \end{equation}
-and therefore $r(t)$ converges to 
+and therefore in the long-time limit $r(t)$ converges to 
 \begin{equation}
-r_{\infty} = \frac{\beta \rho}{\alpha+\rho}
+r_{\infty} = \frac{\beta \rho}{\alpha+\rho}.
 \end{equation}
- as $t \to \infty$, which, as expected, converges to $\beta$ when $\rho \to \infty$ (the repairing of broken cells as fast). Note that $\beta \rho/(\alpha+\rho) < \beta$, therefore it makes sense that computation of $r(t)$ seems to produce an underestimate of $\beta$ in the long-time limit.
- 
-We can estimate $\rho$ from the formula 
+As expected, $r_{\infty}$ converges to $\beta$ when $\rho \to \infty$ (the repairing of broken cells as fast). Note that $\beta \rho/(\alpha+\rho) < \beta$, therefore it makes sense that computation of $r(t)$ seems to produce an underestimate of $\beta$ even in the long-time limit.  We can now estimate $\rho$ from the formula 
 \begin{equation}
-\rho = \frac{\alpha r_{\infty}}{r_{\infty} - \beta}.
+\rho = \frac{\alpha r_{\infty}}{r_{\infty} - \beta}
 \end{equation}
-Using these estimates of $\rho$ along with estimates of $\beta$ obtained previously from fitting $\phi_{m+g}$, we simulate the full model with the broken state and see if any of the discrepancies in the transient dynamics are explained by a slow repair rate. The results are shown in Figure \ref{fig:2} (A). Including a finite time between break and repair seems to explain the transient dynamics in $r(t)$ for the experiments where $\phi_{m+b}$ decays exponentially (highlighted in purple) but no the experiments where few green cells appear (yellow) or the ones with biphasic decay (red). In order to explain the ``bump" in the CAA-SpCas9 and CTG-SpCas9, we assume that some fraction of the repaired cells fail to turn green, but still growth. Some simulations for carrying parameters of this model are shown in Figure \ref{fig:2} (B), where we can see that this will indeed produce the behavior observed in some experiments \textcolor{red}{[can we estimate the probability not to turn green?]}. 
+with $r_{\infty}$ estimates from $r(t)$ in Figure \ref{fig:1} (C) and $\alpha$ and $\beta$ estimates from Figures \ref{fig:1} (A) and (B). 
+Using these estimates of $\rho$ along with estimates of $\beta$ obtained previously from fitting $\phi_{m+g}$, we now simulate the full model with the broken state and see if any of the discrepancies in the transient dynamics are explained by a slow repair rate. The results are shown in Figure \ref{fig:2} (A). Including a finite time between break and repair seems to explain qualitative features of the transient dynamics of $r(t)$ for the experiments where $\phi_{m+b}$ decays exponentially (highlighted in purple) but not the experiments where few green cells appear (yellow) or the ones with biphasic decay (red). We note that the simulations and data are still not in prefect quantitative agreement, with the simulations still producing greater values of $r(t)$. This could be because of the effects of a lag time, or a delay between DNA repair and GFP production. Our inference of the various rates for the subset of experiments which seem to be explained by the data are summarized in Table \ref{tab:1}.
+
+\begin{table}
+\begin{center}
+\begin{tabular}{l|l|r|r|r}
+ nuclease & defect &     $\alpha$[1/minutes] &      $\beta$[1/minutes] &      $\rho$ [1/minutes]\\
+\hline
+SpCas9 &     NR &  0.003853 &  0.001968 &  0.001505 \\
+ Cpf1 &   GAA  &  0.003784 &  0.001377 &  0.002260 \\
+SpCas9 &    CGG &  0.003871 &  0.002027 &  0.001021 \\
+Cpf1 &     NR &  0.004104 &  0.002268 &  0.001992 \\
+\end{tabular}
+\caption{Inferred population growth, break and repair rates from data}\label{tab:1}
+\end{center}
+\end{table}
+
+
+In order to explain the ``bump" in the CAA-SpCas9 and CTG-SpCas9, we assume that some fraction of the repaired cells fail to turn green, but still grow. A simulation of this model is shown in Figure \ref{fig:2} (B), where we can see that this will indeed produce the behavior observed in some experiments. 
 
 
 
@@ -154,27 +173,40 @@ Using these estimates of $\rho$ along with estimates of $\beta$ obtained previou
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=0.6]{fig2.pdf}
-\caption{(A) The average number of bright field and GFP cells as a function of time in each condition.  (B) The fraction of non-GFP cells as function of time for each condition.  (C) The rate to turn obtained from Equation \ref{rt_approx} compared to simulations with the values of inferred from the trajectories in (B). }\label{fig:1}
+\caption{ (C) The rate to turn green obtained from Equation \ref{rt} compared to simulations of the model with a broken with the values of $\alpha$ and $\beta$ inferred from the trajectories in Figure \ref{fig:1} (B) and values of $\rho$ from Figure \ref{fig:1}. A simulation of the model with $1/2$ of the repaired cells failing to turn green.  }\label{fig:2}
 \end{figure}
 
 
-\section{Fluctuation analysis}
-We now consider the variability between wells within a condition. In order to remove the effects of lag time and asynchronous  growth, we consider the variance  of $G$ conditioned on the total number of cells, ${\rm var}(G|N)$. In a simple model where we neglect the broken, non-green state, ${\rm var}(G|N)$ undergoes phase transition at $p_c = 1/2$ (see Section \ref{app:sync} for derivation). When $p<1/2$, ${\rm var}(G|N)$ grows exponentially, while for $p<1/2$ it decays. In all the experiments, we find that ${\rm var}(G|N)$ grows exponentially. 
+\section{Fluctuation analysis is inconsistent with simple model}
+We now consider the variability between wells within a condition. In order to remove the effects of lag time and asynchronous  growth, we consider the variance  of $G$ conditioned on the total number of cells, ${\rm var}(G|N)$. In a simple model where we neglect the broken, non-green state, ${\rm var}(G|N)$ undergoes phase transition at $p_c = 1/2$ (see Section \ref{app:sync} for derivation). When $p<1/2$, ${\rm var}(G|N)$ grows exponentially, while for $p<1/2$ it decays. In all the experiments, we find that ${\rm var}(G|N)$ grows exponentially. The growth of ${\rm var}(G|N)$ is given by the formula 
+\begin{equation}
+{\rm var}(G_t|N) = \left\{\begin{array}{cc} 
+\frac{p}{1-2p} N^{2 + 2 \ln(1-p)/\ln(2)}& \text{ if } p<1/2\\
+\frac{p}{2p-1} N^{1+ 1 \ln(1-p)/\ln(2)}& \text{ if } p>1/2
+\end{array}\right.
+\end{equation}
+This formula seems to be fairly accurate for a more realistic asynchronous model where cells have generation times drawn from a distribution.  Interestingly, the inclusion of a broken state does not affect the long-term behavior of ${\rm var}(G_t|N_t)$; see Section \ref{app:sync}. In Figure \ref{fig:3}, we compare the fluctuations in the data to those in simulations of the the random generation time model  \textcolor{red}{[Need to define this somewhere]} using parameter values computed from Figure \ref{fig:1} as described in the previous section. We simulate the model both with and without the broken state and see that the broken state model does a slightly better job of predicting the growth of the fluctuations, suggesting the broken state is indeed important. However, there are still some inconsistencies between the simulations and the data; namely, the decrease in ${\rm var}(G|N)$ at the end of the experiment.  
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.7]{fig3.pdf}
+\caption{(A) ${\rm var}(G|N)$ compared to simulations of the constant probability model with parameters computed from the previous section.   (B) The same as (B) but including a broken state. }\label{fig:3}
+\end{figure}
+
+
 
 \newpage
 
 \appendix
 
-\section{Analysis of ODE model }\label{app:ode}
-\textcolor{red}{[UNFINISHED]}
-
+\renewcommand{\theequation}{S.\arabic{equation}}
 \section{Analysis of asynchronous model}\label{app:async}
 
-Here consider a stochastic model where divisions are asynchronous; that is, cells have different generation times. For simplicity, we will consider the case where generation times are independent and exponentially distributed. Although not biologically realistic, at captures the essential qualitative features of the dynamics, namely the growth of variance with time. We consider the probability $P(n,g,t)$ of observing $n$ cells, $g$ of which are green at time $t$ and suppose that cells divide at a constant rate $\alpha$, while non-green cells turn green at a rate $\beta$. Under these assumptions $P(n,g,t)$ obeys the master equation 
+Here consider a stochastic model where divisions are asynchronous; that is, cells have different generation times. For simplicity, we will consider the case where generation times are independent and exponentially distributed. Although not biologically realistic, it captures the essential qualitative features of the dynamics, namely the growth of variance with time. We consider the probability $P(n,g,t)$ of observing $n$ cells, $g$ of which are green at time $t$ and suppose that cells divide at a constant rate $\alpha$, while non-green cells turn green at a rate $\beta$. Under these assumptions $P(n,g,t)$ obeys the master equation 
 \begin{align}
 \begin{split}
 \frac{d}{dt}P(n,g,t) &= \alpha(n-g-1)P(n-1,g,t) + \alpha (m-1)P(n-1,g-1,t) \\
-&+ \beta (n-g+1)p(n,g-1,t)- \left[\alpha n + \beta (n-g)  \right]P(n,g,t)
+&+ \beta (n-g+1)p(n,g-1,t)- \left[\alpha n + \beta (n-g)  \right]P(n,g,t).
 \end{split}
 \end{align}
 For the averages, we have
@@ -194,7 +226,7 @@ We now consider the second moment:
 &= \alpha \langle  N G^2\rangle - \alpha \langle G^3 \rangle  + \alpha \langle  G^3\rangle 
   + 2 \alpha \langle  G^2\rangle  + \alpha \langle G \rangle  + \beta \langle N G^2 \rangle  - \beta \langle G^3 \rangle \\
 &+ 2\beta \langle N G \rangle  - 2 \beta \langle G^2 \rangle  + \beta \langle  N\rangle  - \beta \langle  G\rangle 
- - \langle N G^2 \rangle - \beta \langle  N G^2\rangle  + \beta \langle G^3\rangle 
+ - \langle N G^2 \rangle - \beta \langle  N G^2\rangle  + \beta \langle G^3\rangle. 
 \end{align}
 After cancelling terms, we find
 \begin{align}
@@ -207,7 +239,7 @@ For the variance
 &= \frac{d}{dt} \langle G^2 \rangle  - 2\langle G \rangle \frac{d}{dt} \langle G \rangle\\
 &= 2 (\alpha - \beta){\rm var}(G) + 2 \beta {\rm cov}(G,N) + (\alpha-\beta)\langle G \rangle  - \langle  N\rangle. 
 \end{align} 
-We need to calculate the dynamics of the covariance to obtain a closed set of equations. Proceed in a similar manner as we did for the variance, we start with the product:
+We need to calculate the dynamics of the covariance to obtain a closed set of equations. Proceeding in a similar manner as we did for the variance, we start with the product:
 \begin{equation}
 \frac{d}{dt}\langle G N \rangle  = \alpha \langle  G\rangle  + 2\alpha \langle G N \rangle  - \beta \langle G N \rangle  + \beta \langle N^2 \rangle. 
 \end{equation}
@@ -234,7 +266,7 @@ where $\xi_{t,j}$ are independent Bernoulli  random variables with probability o
 \begin{equation}
 G_t \approx 2(1-p)G_{t-1} + p2^{t} + \sqrt{p(1-p)(2^{t} - 2G_{t-1})}\eta_t
 \end{equation}
-where $\eta_t$ are independent standard normal random variates. For the mean (this actually be obtained directly from Equation \ref{Gt} and is exact), we have
+where $\eta_t$ are independent standard normal random variates. For the mean (this can actually be obtained directly from Equation \ref{Gt} and is exact), we have
 \begin{align}
 \langle G_t \rangle &=  2(1-p)\langle G_{t-1} \rangle  + p2^{t}  = 2^t\sum_{j\le} (1-p)^{t-j}p\\
 &= 2^t \left[1-(1-p)^t\right]
@@ -257,12 +289,21 @@ Considering the cases $p<1/2$ and $p>1/2$ separately, we obtain the simple expre
 \end{array}\right.
 \end{equation}
 Rewriting this expression in terms of the total number of cells $N = 2^t$, we have
-\begin{equation}
+\begin{equation}\label{VGN}
 {\rm var}(G_t|N) = \left\{\begin{array}{cc} 
 \frac{p}{1-2p} N^{2 + 2 \ln(1-p)/\ln(2)}& \text{ if } p<1/2\\
 \frac{p}{2p-1} N^{1+ 1 \ln(1-p)/\ln(2)}& \text{ if } p>1/2
 \end{array}\right.
 \end{equation}
+This formula seems to do a very good job of predicting the growth of the conditional variance for an asynchronous model as well; see Figure \ref{}. 
+
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.6]{figS1.pdf}
+\caption{An illustration of the phase transition in Equation \ref{VGN}. }\label{fig:S1}
+\end{figure}
+
 
 
 \subsection{Broken state model}
@@ -281,13 +322,9 @@ B_t &= (1-q)B_{t-1} +2pM_{t-1} - \sqrt{q(1-q)B_{t-1}}\eta_{1,t} - \sqrt{2p(1-p)M
 G_t &=2G_{t-1} + qB_{t-1}+\sqrt{q(1-q)B_{t-1}}\eta_{1,t}.
 \end{split}
 \end{align}
-Here, $\eta_{i,t}$ are independent standard normal random variates, but note that we have been careful to flip the signs in-front of the noise terms above to that, e.g., a positive value of $\eta_{2,t}$ in the first equation corresponds to a negative value in the second. Since we ultimately interested in the distribution of $G_t$ conditioned on the total number of cells, $N_t = G_t + B_t + M_t$, we consider the equation of $N_t$: 
-\begin{equation}
-N_t = 2(N_t - B_t).
-\end{equation}
+Here, $\eta_{i,t}$ are independent standard normal random variates, but note that we have been careful to flip the signs in-front of the noise terms above so that, e.g., a positive value of $\eta_{2,t}$ in the first equation corresponds to a negative value in the second. 
 
-
-Conditioned on the previous generation ${\bf z}_t = (M_t,B_t,G_t)^T$ has a multivariate normal distribution: 
+Conditioned on the previous generation, ${\bf z}_t = (M_t,B_t,G_t)^T$ has a multivariate Gaussian distribution: 
 \begin{align}
 f_t(\bz|\bz') = \frac{1}{\sqrt{2\pi } {\rm det}\Sigma_{t}(\bz')^{1/2}} e^{-\frac{1}{2}(\bz-\bmu_{t}(\bz'))^T\Sigma_{t}(\bz')^{-1}(\bz-\bmu_{t}(\bz'))}
 \end{align}
@@ -317,7 +354,11 @@ A=\
 0 & q & 2
 \end{array}\right].
 \end{equation}
-Writing the initial $\bz_0 = (1,0,0)$, we find 
+This leads to the recursive equation for the average:  
+\begin{equation}
+\langle \bz_t \rangle  = A \langle \bz_{t-1} \rangle 
+\end{equation}
+Taking the initial conditions to be $\bz_0 = (1,0,0)$ (that is, there is initially one modified cell), it is a straightforward exercise in linear algebra (or a few lines in Mathematica) to obtain 
 \begin{equation}
 \langle \bz_t \rangle  = \left[
 \begin{array}{c}
@@ -330,17 +371,21 @@ Writing the initial $\bz_0 = (1,0,0)$, we find
 We find (as we could have deduced without this calculation) that the fraction of green cells approaches one as $t \to \infty$. 
 
 
-Now we turn to the covariance matrix. The elements of $\Sigma_t$, are determined by variance and covariance of $b_t$ and $g_t$: 
+Now we turn to the covariance matrix. The elements of $\Sigma_t$, are determined by variance and covariance of $B_t$ and $G_t$: 
 \begin{align}
+\begin{split}
 \Sigma_{t,1,1} &= {\rm var}(M_t|\bz_{t-1}) =p(1-p)2M_{t-1}\\
 \Sigma_{t,2,2} &= {\rm var}(B_t|\bz_{t-1}) = q(1-q)B_{t-1}+p(1-p)2M_{t-1}\\
 \Sigma_{t,3,3} &= {\rm var}(G_t|\bz_{t-1}) = q(1-q)B_{t-1}
+\end{split}
 \end{align}
 and 
 \begin{align}
+\begin{split}
 \Sigma_{t,1,2} &={\rm cov}(M_t,B_t|\bz_{t-1}) = 2p(1-p)M_{t-1}\\
 \Sigma_{t,2,3} &={\rm cov}(B_t,G_t|\bz_{t-1}) = q(1-q)B_{t-1}\\
-\Sigma_{t,3,1} &={\rm cov}(M_t,G_t|\bz_{t-1}) = 0
+\Sigma_{t,3,1} &={\rm cov}(M_t,G_t|\bz_{t-1}) = 0.
+\end{split}
 \end{align}
 The covariance matrix is therefore, 
 \begin{equation}
@@ -359,10 +404,12 @@ We make ansatz that $P_t(\bz)$ is a Gaussian
 \begin{equation}
 P_t(\bz) = \frac{1}{\sqrt{2\pi }\, \left[{\rm det}\Omega_{t}\right]^{1/2}} e^{-\frac{1}{2}(\bz-\bnu_{t})^T\Omega_{t}^{-1}(\bz-\bnu_{t})}.
 \end{equation}
-This is equivalent to assuming that $B_{t-1}$ and $G_{t-1}$ appearing in the elements of the covariance matrix can be replaced by their averages, thus making the joint distribution of $\bz$ and $\bz'$ also a multivariate Guassian:
+This is equivalent to assuming that $B_{t-1}$ and $G_{t-1}$ appearing in the elements of the covariance matrix can be replaced by their averages, thus making the joint distribution of $\bz$ and $\bz'$ also a multivariate Guassian. This allows us to write 
 \begin{align}
+\begin{split}
 P_t(\bz,\bz') &= f_t(\bz|\bz')P_{t-1}(\bz') \propto e^{-\frac{1}{2}(\bz-\bmu_{t}(\bz'))^T\Sigma_{t}^{-1}(\bz-\bmu_{t}(\bz'))-\frac{1}{2}(\bz'-\bnu_{t-1})^T\Omega_{t-1}^{-1}(\bz'-\bnu_{t-1})}\\
 &\propto e^{-\frac{1}{2}(\bz-\hat{\bmu}_t)^T\hat{\Sigma}_{t}^{-1}(\bz-\hat{\bmu}_{t})}
+\end{split}
 \end{align} 
 where $\hat{\bmu}_t$ and $\hat{\Sigma}_{t}$ are the mean and covariance matrices of the joint distribution of the current and previous generations. 
 %We match the matrix equations 
@@ -372,13 +419,13 @@ where $\hat{\bmu}_t$ and $\hat{\Sigma}_{t}$ are the mean and covariance matrices
 Since $\bz$ and $\bz'$ have marginal distributions given by  $P_{t}(\bz)$ and $P_{t-1}(\bz)$ respectively, $\hat{\Sigma}_{t}$ has the block form:
 \begin{equation}
 \hat{\Sigma}_{t} = \left[ \begin{array}{cc}
-\Omega_t  &\hat{\Sigma}_{1,2}\\
-\hat{\Sigma}_{1,2}^T  &\Omega_{t-1} 
+\Omega_t  & U_t\\
+U_t^T  &\Omega_{t-1} 
 \end{array}\right].
 \end{equation}
 where 
 \begin{equation}
-\hat{\Sigma}_{1,2} =\left[ \begin{array}{ccc}
+U_t =\left[ \begin{array}{ccc}
 {\rm cov}(M_t,M_{t-1})  &{\rm cov}(M_t,B_{t-1})  &{\rm cov}(M_t,G_{t-1}) \\
 {\rm cov}(B_t,M_{t-1})  &{\rm cov}(B_t,B_{t-1})  &{\rm cov}(B_t,G_{t-1}) \\
 {\rm cov}(G_t,M_{t-1})  &{\rm cov}(G_t,B_{t-1})  &{\rm cov}(G_t,G_{t-1}) 
@@ -398,9 +445,9 @@ where
 %{\rm cov}(G_t,B_{t-1}) &= 2 {\rm cov}(G_{t-1},B_{t-1}) + q{\rm var}(B_{t-1})
 %\end{split}
 %\end{align}
-After some algebra, we can now write $\hat{\Sigma}_{1,2}$ in terms of the entries of $\Omega_{t-1}$ (dropping the time subscript for clarity): 
+After some algebra, we find that we can write the matrices $U_t$ in terms of the entries of $\Omega_{t-1}$ (dropping the time subscript for clarity): 
 \begin{align}
-\hat{\Sigma}_{t,1,2} &=\left[ \begin{array}{ccc}
+U_t &=\left[ \begin{array}{ccc}
 2(1-p)\Omega_{1,1}  & 2(1-p) \Omega_{1,2}  & 2(1-p) \Omega_{t-1,1,3} \\
 (1-q) \Omega_{2,1} + 2 p \Omega_{1,1}&(1-q)\Omega_{2,2} + 2p \Omega_{1,2}  &(1-q) \Omega_{2,3} + 2p \Omega_{1,3}\\
 2\Omega_{3,1} + q \Omega_{2,1} &2 \Omega_{3,2} + q \Omega_{2,2}  &2\Omega_{3,3} + q \Omega_{3,2}
@@ -415,18 +462,26 @@ D = \left[ \begin{array}{ccc}
 0 & q  &2
 \end{array}\right].
 \end{equation}
-In order to derive an equation for $\Omega_t$, we notice that $\Sigma_t$ (which is known) can be expressed as the shur complement 
+In order to derive an equation for $\Omega_t$, we notice that standard properties of multivariate normal distributions allow us to write $\Sigma_t$ (which is known) as a Shur complement of the blocks in $\hat{\Sigma}$:
  \begin{equation}
- \Sigma_t = \Omega_{t} - \hat{\Sigma}_{t,1,2} \Omega_{t-1}^{-1}\hat{\Sigma}_{t,1,2}^T\
+ \Sigma_t = \Omega_{t} - U_t \Omega_{t-1}^{-1}U_t^T\
  \end{equation}
  which gives us a recursive relation for $\Omega_t$: 
  \begin{equation}
  \Omega_{t} =  \Sigma_t + D(D\Omega_{t-1})^T =  \Sigma_t + D\Omega_{t-1}D^T
  \end{equation}
- Taking $\Omega_{0} = 0$, 
+ Taking $\Omega_{0}$ to be a matrix of all zeros, 
  \begin{equation}
   \Omega_{t} = \sum_{j\le t}D^{t-j}\Sigma_j \left(D^T\right)^{t-j}
  \end{equation}
+ 
+ 
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.6]{figS2.pdf}
+\caption{ Theoretical predictions for the growth of ${\rm var}(G|N)$ for the model with a broken state using Equation \ref{VGN_broken} compared to the predictions for a model with no broken state (Equation \ref{VGN}).  }\label{fig:S2}
+\end{figure}
+
  We are actually interested in the variation in green cells conditioned on the total number of cells, thus, we introduce the transformation 
  \begin{equation}
  L = \left[ \begin{array}{ccc}
@@ -439,10 +494,11 @@ In order to derive an equation for $\Omega_t$, we notice that $\Sigma_t$ (which 
   \bar{\Omega}_{t} =L\Omega_t L^T =  \sum_{j\le t}LD^{t-j}\Sigma_j \left(D^T\right)^{t-j}L^T
  \end{equation}
  In terms of the entries of $ \tilde{\Omega}_{t}$, 
- \begin{equation}
+ \begin{equation}\label{VGN_broken}
  {\rm var}(G_t|N_t) = \bar{\Omega}_{t,2,2} - \frac{\bar{\Omega}_{t,1,2}^2}{ \bar{\Omega}_{t,1,1} }. 
  \end{equation}
- 
+Although we don't have a closed form for ${\rm var}(G_t|N_t)$, it can easily be computed numerically. We find that the broken state seems to have no effect on the long term growth of  ${\rm var}(G_t|N_t)$; see Figure \ref{fig:S2}.\textcolor{red}{[There has got to be an easy way to see this analytically ...]}. 
+
 
 
 
