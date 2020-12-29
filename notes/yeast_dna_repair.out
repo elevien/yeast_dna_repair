@@ -1,7 +1,8 @@
 \BOOKMARK [1][-]{section.1}{Introduction}{}% 1
 \BOOKMARK [1][-]{section.2}{Analysis of pooled data reveals time-scales of break and repair}{}% 2
-\BOOKMARK [1][-]{section.3}{Fluctuation analysis is inconsistent with simple model}{}% 3
-\BOOKMARK [1][-]{appendix.A}{Analysis of asynchronous model}{}% 4
-\BOOKMARK [1][-]{appendix.B}{Analysis of synchronous model}{}% 5
-\BOOKMARK [2][-]{subsection.B.1}{Two state model}{appendix.B}% 6
-\BOOKMARK [2][-]{subsection.B.2}{Broken state model}{appendix.B}% 7
+\BOOKMARK [1][-]{section.3}{Inference from ODE model predicts well-to-well variability}{}% 3
+\BOOKMARK [1][-]{appendix.A}{Solution of ODE model}{}% 4
+\BOOKMARK [1][-]{appendix.B}{Analysis of asynchronous model}{}% 5
+\BOOKMARK [1][-]{appendix.C}{Analysis of synchronous model}{}% 6
+\BOOKMARK [2][-]{subsection.C.1}{Two state model}{appendix.C}% 7
+\BOOKMARK [2][-]{subsection.C.2}{Broken state model}{appendix.C}% 8
