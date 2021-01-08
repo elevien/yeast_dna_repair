@@ -1,8 +1,10 @@
 \BOOKMARK [1][-]{section.1}{Introduction}{}% 1
 \BOOKMARK [1][-]{section.2}{Analysis of pooled data reveals time-scales of break and repair}{}% 2
-\BOOKMARK [1][-]{section.3}{Inference from ODE model predicts well-to-well variability}{}% 3
-\BOOKMARK [1][-]{appendix.A}{Solution of ODE model}{}% 4
-\BOOKMARK [1][-]{appendix.B}{Analysis of asynchronous model}{}% 5
-\BOOKMARK [1][-]{appendix.C}{Analysis of synchronous model}{}% 6
-\BOOKMARK [2][-]{subsection.C.1}{Two state model}{appendix.C}% 7
-\BOOKMARK [2][-]{subsection.C.2}{Broken state model}{appendix.C}% 8
+\BOOKMARK [2][-]{subsection.2.1}{Model}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Trajectories of rate to turn green}{section.2}% 4
+\BOOKMARK [1][-]{section.3}{Inference from ODE model predicts well-to-well variability}{}% 5
+\BOOKMARK [1][-]{appendix.A}{Solution of ODE model}{}% 6
+\BOOKMARK [1][-]{appendix.B}{Analysis of asynchronous model}{}% 7
+\BOOKMARK [1][-]{appendix.C}{Analysis of synchronous model}{}% 8
+\BOOKMARK [2][-]{subsection.C.1}{Two state model}{appendix.C}% 9
+\BOOKMARK [2][-]{subsection.C.2}{Broken state model}{appendix.C}% 10

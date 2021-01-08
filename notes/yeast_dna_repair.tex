@@ -94,19 +94,21 @@
 \section{Introduction}
 
 \section{Analysis of pooled data reveals time-scales of break and repair}
-We begin by ignoring the single-cell resolution afforded to us by the individual wells, and treat each condition as a bulk experiment by studying the number of bright field and GFP cells averaged over all the wells. The trajectories of the average number of bright field and GFP cells are shown in Figure \ref{fig:1} (A). We compare this data to a simple ODE mode in which an initial population of cells with modified DNA grows at a rate $\alpha$ and switches into a non-growing, broken state, at a rate $\rho$. The broken cells can then become repaired and once again begin to grow at a rate $\alpha$. Letting $m$, $b$ and $g$ be the number of modified, broken and repaired (or green) cells, we have
+
+\subsection{Model}
+We begin by ignoring the single-cell resolution afforded to us by the individual wells, and treat each condition as a bulk experiment by studying the number of bright field and GFP cells averaged over all the wells. The trajectories of the average number of bright field and GFP cells are shown in Figure \ref{fig:1} (A). We compare this data to a simple ODE mode in which an initial population of cells with modified DNA grows at a rate $\alpha$ and switches into a non-growing, broken state, at a rate $\beta$. The broken cells can then become repaired at a rate $\rho$ and once again begin to grow at a rate $\alpha$. Letting $m$, $b$ and $g$ be the number of modified, broken and repaired (or green) cells, we have
 \begin{align}\label{mbg_ode}
 \frac{d}{dt}m &= (\alpha - \beta) m\\
 \frac{d}{dt}b &= \beta m - \rho b\\
 \frac{d}{dt}g &= \alpha g + \rho b.
 \end{align}
-It is easy to see that the total population size $n = m+b+g$ will eventually grow exponentially at a rate $\alpha$. We can therefore obtain $\alpha$ by fitting the bright field data to an exponential. We can also see from these equations that $m$ and $b$ will eventually grow (assuming $\alpha> \beta$) exponentially at a rate $\alpha-\beta$, while $g$ will eventually grows at a rate $\alpha$. 
+It is easy to see that the total population size $n = m+b+g$ will eventually grow exponentially at a rate $\alpha$. We can therefore obtain $\alpha$ by fitting the bright field data to an exponential. We can also see from these equations that $m$ and $b$ will eventually grow (assuming $\alpha> \beta$) exponentially at a rate $\alpha-\beta$, while $g$, and hence the total number of cells, will eventually grows at a rate $\alpha$. 
 Therefore, a prediction of this model is that the fraction of  non-GFP cells, $\phi_{m+b} = (b+m)/(m+b+g)$  decays exponentially at a rate $\beta$:
 \begin{equation}
-\phi_{m+b} \sim 1- e^{-\beta t}. 
+\phi_{m+b} \sim e^{-\beta t}. 
 \end{equation}
 Note that this result is independent of whether we impose a carrying capacity on the population, the ratios will remain unchanged even if the population is not growing exponentially. 
-Fitting $\ln (1-\phi_{m+b})$ to a line thus gives us a way to infer the break rate which (at least in the long-term) is independent of $\rho$. 
+Fitting $\ln  \phi_{m+b}$ to a line thus gives us a way to infer the break rate which (at least in the long-term) is independent of $\rho$. 
 This exponential decay is seen in some, but not all experiments; see Figure \ref{fig:1} (B). In CTG-Cpf1 and CGG-Cpf1 the green cells appear very slowly, making is difficult to separate the long term decay from the the transient dynamics. In GAA-SpCas9 and CTG-SpCas9 we don't see the number of GFP cells converge to the number of bright field cells, resulting an a biphasic trajectory of $\phi_{m+b}$. 
 
 \begin{figure}[h!]
@@ -115,7 +117,7 @@ This exponential decay is seen in some, but not all experiments; see Figure \ref
 \caption{(A) The average number of bright field and GFP cells as a function of time in each condition.  (B) The fraction of non-GFP cells as function of time for each condition.  (C) The rate to turn green obtained from Equation \ref{rt} compared to simulations of the model without a broken state using values of inferred from the trajectories in (B). Classification of experiments in terms of comparison between predictions from (B) and (C). }\label{fig:1}
 \end{figure}
 
-
+\subsection{Trajectories of rate to turn green}
 An alternative approach to inferring $\beta$ is to look at the instantaneous  production of green cells. Solving for $\beta$ in Equation \ref{mbg_ode}, we get 
 \begin{align}
 \begin{split}
@@ -123,21 +125,73 @@ An alternative approach to inferring $\beta$ is to look at the instantaneous  pr
 &= \frac{1}{n-g-b}\left[\frac{d}{dt}b +\frac{d}{dt}g -\frac{g}{n-b} \frac{d}{dt}n\right]
 \end{split}
 \end{align}
-Since we don't know the number of broken and not yet repaired cells, we can't compute all the terms in this equation directly. Intuitively, if $\rho \gg \beta$, we can neglect the broken cells \textcolor{red}{[I believe this is usually called an adiabatic  approximation]}, leading to the approximation
+Since we don't know the number of broken and not yet repaired cells, we can't compute all the terms in this equation directly. Intuitively, if $\rho \gg \beta$, we can neglect the broken cells, leading to the approximation
 \begin{equation}\label{rt}
 \beta \approx r(t) \equiv \frac{1}{n-g}\left[\frac{d}{dt}g -\frac{g}{n} \frac{d}{dt}n\right]. 
 \end{equation}
 Within the model, we can obtain an exact formula for $r(t)$ for finite $\rho$ by plugging the solution of Equation \ref{mbg_ode} into Equation \ref{rt} (see Appendix \ref{app:ode}).  We find that if $\beta < \alpha$, $r(t) \to \beta$ in the long-time limit, regardless of $\rho$. 
 
 
-In Figure \ref{fig:1} (C) we compare $r(t)$ compute for the data and simulations of the model with $\rho \to \infty$ so that there are no broken cells. We first focus on the experiments for which $\phi_{m+b}$ exhibits clear exponential decay. For these experiments, the simulations and data appear to be converging to similar values of $r(t)$, although the transient dynamics different significantly. Since the convergence of $r(t)$ to $\beta$ depends on $\rho$, we check whether the trajectories can be reproduced by simulations of the model with finite $\rho$. Selecting values of $\rho$ on the order of $\beta$, we find that the qualitative features of the trajectories are reproduced; see  Figure \ref{fig:2} (B). However, this does not explain the ``bump" in the CAA-SpCas9 and CTG-SpCas9. To reproduce this, we assume that some fraction of the repaired cells fail to turn green, but still grow. A simulation of this model is shown in Figure \ref{fig:2} (B), where we can see that this will indeed produce the behavior observed in some experiments. 
+In Figure \ref{fig:1} (C) we compare $r(t)$ in the data and simulations of the model with no broken cells (meaning $\rho \to \infty$). We first focus on the experiments for which $\phi_{m+b}$ exhibits clear exponential decay. For these experiments, the simulations and data appear to be converging to similar values of $r(t)$, although the transient dynamics different significantly. Since the convergence of $r(t)$ to $\beta$ depends on $\rho$, we check whether the trajectories can be reproduced by simulations of the model with finite $\rho$. Selecting values of $\rho$ on the order of $\beta$, we find that the qualitative features of the trajectories are reproduced; see  Figure \ref{fig:2} (B). However, this does not explain the ``bump" in the GAA-SpCas9 and CTG-SpCas9. To reproduce this, we assume that some fraction of the repaired cells fail to turn green, but still grow. A simulation of this model is shown in Figure \ref{fig:2} (B), where we can see that this will indeed produce the behavior observed in some experiments. 
+
+%In Table \ref{table:1} we show the parameters used in Figure \ref{fig:2} (B).
+
+
+We now consider that there may be a lag between the repair of broken cells and the expression of GFP. The only difference between the lag period and the broken state is that cells may still grow when during the lag period. Therefore, it could be that the lag period rather than the (more biologically relevant) broken state explains the slow increase in $r(t)$. Letting $r$ denote the cells that are repaired and growing but non-green and $1/\gamma$ be the time-scale between repair and GFP production, we have the expanded system 
+\begin{align}\label{mbg_ode_lag}
+\frac{d}{dt}m &= (\alpha - \beta) m\\
+\frac{d}{dt}b &= \beta m - \rho b\\
+\frac{d}{dt}r &= \alpha r +  \rho b - \gamma r\\
+\frac{d}{dt}g &= \alpha g + \gamma r. 
+\end{align}
+%If we again neglect the broken state, we obtain 
+%\begin{align}\label{mbg_ode_lag}
+%\frac{d}{dt}m &= (\alpha - \beta) m\\
+%\frac{d}{dt}r &= \alpha r +  \beta m - \gamma r\\
+%\frac{d}{dt}g &= \alpha g + \gamma r. 
+%\end{align}
+As with the original model, these ODEs can be solved exactly to obtain an expression for $r(t)$. In the large $\rho$ limit, we find
+\begin{equation}
+r(t) = \frac{\beta  \gamma  \left(e^{\beta  t}-e^{\gamma  t}\right)}{\beta  e^{\beta  t}-\gamma 
+   e^{\gamma  t}}
+\end{equation}
+which converges to $\min(\gamma,\beta)$.  Thus the long-term behavior of $r(t)$ shown in Figures \ref{fig:1} and \ref{fig:1} is not inconsistent with values of $\gamma$ is close to or greater than $\beta$. By simulating the stochastic model with no broken state, but values of $\gamma$ which are close to $\beta$, we find that a lag between repair and GFP production provides an alternative explanation of our previous observations. 
+
+
+%\begin{table}
+%\begin{center}
+%\begin{tabular}{|l|l|c|c|c|}
+%\hline
+% nuclease & defect &     $\alpha$&      $\beta$&       $\rho$ \\
+%\hline
+%   SpCas9 &     NR &  0.003853 &  0.001968 &  0.001505 \\
+%   Cpf1 &    CTG &  0.003870 &  0.000103 &  0.000344 \\
+%   Cpf1 &    CGG &  0.003575 &  0.000011 &  0.000022 \\
+%   SpCas9 &    GAA &  0.001823 &  0.000333 &  0.000167 \\
+%   Cpf1 &   GAA  &  0.003784 &  0.001377 &  0.002260 \\
+%   SpCas9 &    CTG &  0.002480 &  0.000913 &  0.000307 \\
+%  SpCas9 &    CGG &  0.003871 &  0.002027 &  0.001021 \\
+%    Cpf1 &     NR &  0.004104 &  0.002268 &  0.001992 \\
+%   \hline
+%\end{tabular}
+%\end{center}
+%\caption{Estimates of the models parameters from the ODE model}\label{table:1}
+%\end{table}
 
 
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=0.6]{fig2.pdf}
-\caption{ (C) The rate to turn green obtained from Equation \ref{rt} compared to simulations of the model with a broken with the values of $\alpha$ and $\beta$ inferred from the trajectories in Figure \ref{fig:1} (B) and values of $\rho$ comparable to $\beta$. (B) A simulation of the model with $1/2$ of the repaired cells failing to turn green.  }\label{fig:2}
+\caption{ (A) The rate to turn green obtained from Equation \ref{rt} compared to simulations of the model with a broken with the values of $\alpha$ and $\beta$ inferred from the trajectories in Figure \ref{fig:1} (B) and values of $\rho$ comparable to $\beta$. The values of $\beta$ found to give agreement between the simulations are data are $\rho = \beta/5$. (B) A simulation of the model with $1/2$ of the repaired cells failing to turn green.  }\label{fig:2}
 \end{figure}
+
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.6]{./../figures/r-vs-t_data_vs_gfp_lag_time.pdf}
+\caption{ The rate to turn green obtained from Equation \ref{rt} compared to simulations of the model with a lag between repair and GFP production. The values of the rate for GFP to be expressed after repair $(\gamma)$ are $\gamma  = 0.8 \beta$.  }\label{fig:2}
+\end{figure}
+
 
 
 \section{Inference from ODE model predicts well-to-well variability}
@@ -145,17 +199,17 @@ In Figure \ref{fig:1} (C) we compare $r(t)$ compute for the data and simulations
 \begin{figure}[t!]
 \centering
 \includegraphics[scale=0.7]{fig3.pdf}
-\caption{(A) ${\rm var}(G|N)$ compared to simulations of the constant probability model with parameters computed from the previous section.   (B) The same as (A) but including a broken state. }\label{fig:3}
+\caption{(A) ${\rm var}(G|N)$ compared to simulations of the constant probability model with parameters computed from the previous section.   (B) The same as (A) but including a broken state, with the same parameter $\rho$ used in the simulations in Figure \ref{fig:2} (A). }\label{fig:3}
 \end{figure}
 
-We now consider the variability between wells within a condition. In order to remove the effects of lag time and asynchronous  growth, we consider the variance  of $G$ conditioned on the total number of cells, ${\rm var}(G|N)$. In a simple model where we neglect the broken, non-green state, ${\rm var}(G|N)$ undergoes phase transition at $p_c = 1/2$ (see Section \ref{app:sync} for derivation). When $p<1/2$, ${\rm var}(G|N)$ grows exponentially, while for $p<1/2$ it decays. In all the experiments, we find that ${\rm var}(G|N)$ grows exponentially. The growth of ${\rm var}(G|N)$ is given by the formula 
+We now consider the variability between wells within a condition. In order to remove the effects of lag time and asynchronous  growth, we consider the variance  of $G$ conditioned on the total number of cells, ${\rm var}(G|N)$. In a simple model where we neglect the broken, non-green state, ${\rm var}(G|N)$ undergoes a phase transition at $p_c = 1/2$ (see Section \ref{app:sync} for derivation). When $p<1/2$, ${\rm var}(G|N)$ grows exponentially, while for $p<1/2$ it decays. In all the experiments, we find that ${\rm var}(G|N)$ grows exponentially. In general, the growth of ${\rm var}(G|N)$ is given by the formula 
 \begin{equation}
 {\rm var}(G_t|N) = \left\{\begin{array}{cc} 
 \frac{p}{1-2p} N^{2 + 2 \ln(1-p)/\ln(2)}& \text{ if } p<1/2\\
 \frac{p}{2p-1} N^{1+ 1 \ln(1-p)/\ln(2)}& \text{ if } p>1/2
 \end{array}\right.
 \end{equation}
-This formula seems to be fairly accurate for a more realistic asynchronous model where cells have generation times drawn from a distribution.  Interestingly, the inclusion of a broken state does not affect the long-term behavior of ${\rm var}(G_t|N_t)$; see Section \ref{app:sync}. In Figure \ref{fig:3}, we compare the fluctuations in the data to those in simulations of the the random generation time model  \textcolor{red}{[Need to define this somewhere]} using parameter values computed from Figure \ref{fig:1} as described in the previous section. We simulate the model both with and without the broken state and see that the broken state model does a slightly better job of predicting the growth of the fluctuations, suggesting the broken state is indeed important. However, there are still some inconsistencies between the simulations and the data; namely, the decrease in ${\rm var}(G|N)$ at the end of the experiment.  
+This formula seems to be fairly accurate for a more realistic asynchronous model where cells have generation times drawn from a distribution.  Interestingly, the inclusion of a broken state does not affect the long-term behavior of ${\rm var}(G_t|N_t)$; see Section \ref{app:sync}. In Figure \ref{fig:3}, we compare the fluctuations in the data to those in simulations of the the random generation time model  \textcolor{red}{[NOTE: Need to define this somewhere]} using parameter values computed from Figure \ref{fig:1} as described in the previous section. We simulate the model both with and without the broken state and see that the broken state model does a slightly better job of predicting the growth of the fluctuations, suggesting the broken state is indeed important. However, there are still some inconsistencies between the simulations and the data; namely, the decrease in ${\rm var}(G|N)$ at the end of the experiment.  
 
 
 \textcolor{red}{To-do: 
@@ -163,6 +217,7 @@ This formula seems to be fairly accurate for a more realistic asynchronous model
 \item Test if lag between repair and GFP production (but no broken state) can also reproduce qualitative features of data
 \item Find more quantitive way to infer $\rho$ (currently just tried $\rho$ close to $\beta$). Fitting the curves doesn't work so well due lag time. 
 \item Plot variance in green cells as a function of time in data vs. simulations
+\item Show distribution of simulations
 \end{itemize}
 }
 
@@ -199,7 +254,7 @@ We can obtain the large time limit by looking at the fastest growing terms in th
 \begin{equation}
 r_{\infty} \equiv \lim_{t \to \infty} r(t) = \frac{\beta^2 \rho^3}{\beta \rho^3} = \beta
 \end{equation}
-for regardless of $\rho$. 
+regardless of $\rho$. 
 %If $\beta> \alpha$ the fastest growing terms grow as $\alpha + 2\beta + 2\rho$ and we have
 %\begin{equation}
 %r_{\infty} \equiv \lim_{t \to \infty} r(t) = \frac{\alpha \beta^2 \rho^2}{\rho^2 \beta^2} = \alpha. 
@@ -314,7 +369,7 @@ This formula seems to do a very good job of predicting the growth of the conditi
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=0.6]{figS1.pdf}
-\caption{An illustration of the phase transition in Equation \ref{VGN}. }\label{fig:S1}
+\caption{An illustration of the phase transition in Equation \ref{VGN} with theoretical predictions of the synchronous model  (lines) and simulations of the asynchronous model (circles). }\label{fig:S1}
 \end{figure}
 
 
@@ -417,7 +472,7 @@ We make ansatz that $P_t(\bz)$ is a Gaussian
 \begin{equation}
 P_t(\bz) = \frac{1}{\sqrt{2\pi }\, \left[{\rm det}\Omega_{t}\right]^{1/2}} e^{-\frac{1}{2}(\bz-\bnu_{t})^T\Omega_{t}^{-1}(\bz-\bnu_{t})}.
 \end{equation}
-This is equivalent to assuming that $B_{t-1}$ and $G_{t-1}$ appearing in the elements of the covariance matrix can be replaced by their averages, thus making the joint distribution of $\bz$ and $\bz'$ also a multivariate Guassian. This allows us to write 
+This is equivalent to assuming that $B_{t-1}$ and $G_{t-1}$ appearing in the elements of the covariance matrix can be replaced by their averages, thus making the joint distribution of $\bz$ and $\bz'$ also a multivariate Gaussian. This allows us to write 
 \begin{align}
 \begin{split}
 P_t(\bz,\bz') &= f_t(\bz|\bz')P_{t-1}(\bz') \propto e^{-\frac{1}{2}(\bz-\bmu_{t}(\bz'))^T\Sigma_{t}^{-1}(\bz-\bmu_{t}(\bz'))-\frac{1}{2}(\bz'-\bnu_{t-1})^T\Omega_{t-1}^{-1}(\bz'-\bnu_{t-1})}\\

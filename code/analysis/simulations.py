@@ -181,6 +181,9 @@ class bellman_harris_model_base:
 
 class constant_probability_model(bellman_harris_model_base):
     def __init__(self,f,f0,p):
+        '''
+        constant probability model with general lag and generation time distribution
+        '''
         self.p = p
         type_names = ['ng','gfp']
         Q = lambda gt,t: np.array([[1-p,p],[0,1]])
@@ -188,11 +191,30 @@ class constant_probability_model(bellman_harris_model_base):
 
 class constant_rate_model(bellman_harris_model_base):
     def __init__(self,f,f0,beta):
+        '''
+        constant rate model with general lag and generation time distribution
+        '''
         self.beta = beta
         type_names = ['ng','gfp']
 
         Q = lambda gt,t: np.array([[np.exp(-beta*gt),1-np.exp(-beta*gt)],[0,1]])
         bellman_harris_model_base.__init__(self,f,f0,Q,type_names)
+
+class constant_probability_model_igt(bellman_harris_model_base):
+    def __init__(self,f,f0,p):
+        '''
+        constant probability model with general lag and generation time distribution
+        '''
+        self.p = p
+        type_names = ['ng','gfp']
+        Q = lambda gt,t: np.array([[1-p,p],[0,1]])
+        bellman_harris_model_base.__init__(self,f,f0,Q,type_names)
+
+
+# ----------------------------------------------------------------------------
+# pre-defined models
+# ----------------------------------------------------------------------------
+
 
 # class two_state_constant_probability_model(bellman_harris_model_base):
 #     def __init__(self,f,f0,beta):

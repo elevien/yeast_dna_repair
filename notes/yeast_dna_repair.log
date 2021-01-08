@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  29 DEC 2020 15:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  8 JAN 2021 16:49
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -448,7 +448,11 @@ Package: authblk 2001/02/27 1.3 (PWD)
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... none found.
 
-(./yeast_dna_repair.aux)
+(./yeast_dna_repair.aux
+
+LaTeX Warning: Label `fig:2' multiply defined.
+
+)
 \openout1 = `yeast_dna_repair.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 88.
@@ -535,17 +539,17 @@ LaTeX Info: Redefining \nameref on input line 88.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
  (./yeast_dna_repair.toc
-LaTeX Font Info:    Try loading font information for U+msa on input line 7.
+LaTeX Font Info:    Try loading font information for U+msa on input line 3.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 7.
+LaTeX Font Info:    Try loading font information for U+msb on input line 3.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+rsfs on input line 7.
+LaTeX Font Info:    Try loading font information for U+rsfs on input line 3.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/jknapltx/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
@@ -553,100 +557,121 @@ File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 \tf@toc=\write4
 \openout4 = `yeast_dna_repair.toc'.
 
+ [1
 
-<fig1.pdf, id=46, 710.655pt x 723.08014pt>
+{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+<fig1.pdf, id=75, 710.655pt x 723.08014pt>
 File: fig1.pdf Graphic file (type pdf)
  <use fig1.pdf>
-Package pdftex.def Info: fig1.pdf used on input line 114.
+Package pdftex.def Info: fig1.pdf used on input line 116.
 (pdftex.def)             Requested size: 426.39629pt x 433.85143pt.
+ [2 <./fig1.pdf>]
+<fig2.pdf, id=115, 686.565pt x 510.25421pt>
+File: fig2.pdf Graphic file (type pdf)
+ <use fig2.pdf>
+Package pdftex.def Info: fig2.pdf used on input line 184.
+(pdftex.def)             Requested size: 411.94218pt x 306.15488pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[1
 
-{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-[2 <./fig1.pdf>] <fig2.pdf, id=105, 686.565pt x 510.25421pt>
-File: fig2.pdf Graphic file (type pdf)
- <use fig2.pdf>
-Package pdftex.def Info: fig2.pdf used on input line 138.
-(pdftex.def)             Requested size: 411.94218pt x 306.15488pt.
+<./../figures/r-vs-t_data_vs_gfp_lag_time.pdf, id=120, 875.67104pt x 369.781pt>
+File: ./../figures/r-vs-t_data_vs_gfp_lag_time.pdf Graphic file (type pdf)
+<use ./../figures/r-vs-t_data_vs_gfp_lag_time.pdf>
+Package pdftex.def Info: ./../figures/r-vs-t_data_vs_gfp_lag_time.pdf used on i
+nput line 191.
+(pdftex.def)             Requested size: 525.40668pt x 221.8703pt.
 
-<fig3.pdf, id=110, 614.82947pt x 519.61798pt>
+Overfull \hbox (55.65166pt too wide) in paragraph at lines 191--192
+ [][] 
+ []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<fig3.pdf, id=123, 614.82947pt x 519.61798pt>
 File: fig3.pdf Graphic file (type pdf)
  <use fig3.pdf>
-Package pdftex.def Info: fig3.pdf used on input line 147.
+Package pdftex.def Info: fig3.pdf used on input line 201.
 (pdftex.def)             Requested size: 430.37769pt x 363.7301pt.
- [3 <./fig2.pdf>]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 167.
+ [3]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 222.
 
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 167.
- [4 <./fig3.pdf>]
-[5]
-Overfull \hbox (37.97542pt too wide) detected at line 197
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 222.
+ [4 <./fig2.pdf>]
+[5 <./../figures/r-vs-t_data_vs_gfp_lag_time.pdf>]
+Overfull \hbox (37.97542pt too wide) detected at line 252
 [][]\OML/cmm/m/it/10 r\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 t\OT1/cmr/m/n/10 ) = []
 \OML/cmm/m/it/10 :
  []
 
-[6] [7] <figS1.pdf, id=206, 495.67603pt x 259.36961pt>
+[6 <./fig3.pdf>] [7] [8] <figS1.pdf, id=287, 495.67603pt x 259.36961pt>
 File: figS1.pdf Graphic file (type pdf)
- <use figS1.pdf>
-Package pdftex.def Info: figS1.pdf used on input line 316.
+
+<use figS1.pdf>
+Package pdftex.def Info: figS1.pdf used on input line 371.
 (pdftex.def)             Requested size: 297.4079pt x 155.62296pt.
+ [9 <./figS1.pdf>] [10]
+<figS2.pdf, id=324, 482.87032pt x 249.21095pt>
+File: figS2.pdf Graphic file (type pdf)
+ <use figS2.pdf>
+Package pdftex.def Info: figS2.pdf used on input line 549.
+(pdftex.def)             Requested size: 289.72441pt x 149.52773pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[8] [9 <./figS1.pdf>] [10] <figS2.pdf, id=258, 482.87032pt x 249.21095pt>
-File: figS2.pdf Graphic file (type pdf)
-
-<use figS2.pdf>
-Package pdftex.def Info: figS2.pdf used on input line 494.
-(pdftex.def)             Requested size: 289.72441pt x 149.52773pt.
-
 No file yeast_dna_repair.bbl.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 524.
-[11 <./figS2.pdf>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 524.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 579.
+[11] [12 <./figS2.pdf>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 579.
  (./yeast_dna_repair.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 524.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 524.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 579.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 579.
 Package rerunfilecheck Info: File `yeast_dna_repair.out' has not changed.
-(rerunfilecheck)             Checksum: B7E8BF0F7CBB297EC156AFF5A12D1A07;559.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 524.
+(rerunfilecheck)             Checksum: E2CBA01EA4740DE63AAF2A060027E90F;697.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 579.
  ) 
 Here is how much of TeX's memory you used:
- 9904 strings out of 493014
- 146941 string characters out of 6133351
- 269633 words of memory out of 5000000
- 13215 multiletter control sequences out of 15000+600000
+ 9924 strings out of 493014
+ 147366 string characters out of 6133351
+ 269820 words of memory out of 5000000
+ 13223 multiletter control sequences out of 15000+600000
  10108 words of font info for 39 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 36i,17n,39p,1095b,456s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
-></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
-</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></
-usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></u
-sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></us
-r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/
-local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/lo
-cal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/lo
-cal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb></us
-r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/
-local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/loc
-al/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/
-texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/t
-exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/tex
-live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on yeast_dna_repair.pdf (11 pages, 834206 bytes).
+ 36i,17n,39p,1078b,456s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{figure.caption.8} has been referenced but does no
+t exist, replaced by a fixed one
+
+</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><
+/usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></
+usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></us
+r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr
+/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/
+local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/lo
+cal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/loca
+l/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/loca
+l/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb></usr/
+local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/lo
+cal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local
+/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/te
+xlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/tex
+live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texli
+ve/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
+Output written on yeast_dna_repair.pdf (12 pages, 862389 bytes).
 PDF statistics:
- 354 PDF objects out of 1000 (max. 8388607)
- 299 compressed objects within 3 object streams
- 91 named destinations out of 1000 (max. 500000)
- 90 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 431 PDF objects out of 1000 (max. 8388607)
+ 334 compressed objects within 4 object streams
+ 101 named destinations out of 1000 (max. 500000)
+ 111 words of extra memory for PDF output out of 10000 (max. 10000000)
 
