@@ -5,3 +5,7 @@
 **/sandbox*
 **/output*
 **/raw_data*
+**/notes*
+*.svg
+*.png
+*.pdf
