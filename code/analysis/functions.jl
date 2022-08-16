@@ -53,6 +53,7 @@ function mbr_model(du,u,θ,t)
 
 end
 
+# model with repaired but non-gfp cells
 function mbrg_model(du,u,θ,t)
     m, b, r, g = u
     sigma, alpha, beta, gamma, rho, tlag   = θ
@@ -70,7 +71,7 @@ function mbrg_model(du,u,θ,t)
 
 end
 
-
+# set priors
 α_prior_mu = log(2)/3
 α_prior_CV = 1
 β_prior_mu = log(2)/4
