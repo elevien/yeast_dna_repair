@@ -87,7 +87,7 @@ end
 β_prior = Gamma(1/β_prior_CV^2,β_prior_mu*β_prior_CV^2) # break rate
 ρ_prior = Gamma(1/ρ_prior_CV^2,ρ_prior_mu*ρ_prior_CV^2) # repair rate
 τ_prior = Gamma(1/τ_prior_CV^2,τ_prior_mu*τ_prior_CV^2)
-priors = [σ_prior,α_prior,β_prior,ρ_prior,τ_prior];
+θ = [σ_prior,α_prior,β_prior,ρ_prior,τ_prior];
 
 
 @model function molecular_model(data,prob)
@@ -113,7 +113,7 @@ priors = [σ_prior,α_prior,β_prior,ρ_prior,τ_prior];
 end
 
 
-function get_posterior(mol_df)
+function get_posterior(mol_df,θ)
     # get data ready
     gfp = mol_df.gfp
     dsb = mol_df.dsb
@@ -143,7 +143,7 @@ function inference_pipeline(mol_df,micro_df,outfile)
 
 
     # get data ready
-    chain = get_posterior(mol_df)
+    chain = get_posterior(mol_df,θ)
 
 
     #posterior_corner(DataFrame(chain)[:,[:σ,:α,:β,:ρ,:τ]],(7,7))
